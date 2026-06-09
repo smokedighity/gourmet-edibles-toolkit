@@ -210,16 +210,17 @@
                 <div id="education" class="tool-section">
                     <div class="gourmet-card p-8 rounded-3xl max-w-3xl">
                         <h2 class="text-3xl font-semibold mb-6">Education Hub</h2>
+                        <p class="text-[#aaa] mb-6">Learn the fundamentals step by step.</p>
                         
                         <div class="space-y-3">
                             <div onclick="showEducation('decarb')" class="p-4 bg-[#111] rounded-2xl cursor-pointer hover:bg-[#222]">
-                                <strong>How Decarboxylation Works</strong>
+                                <strong>1. How Decarboxylation Works (Step-by-Step)</strong>
                             </div>
                             <div onclick="showEducation('infusion')" class="p-4 bg-[#111] rounded-2xl cursor-pointer hover:bg-[#222]">
-                                <strong>Infusion Methods Explained</strong>
+                                <strong>2. Infusion Methods Explained (Step-by-Step)</strong>
                             </div>
                             <div onclick="showEducation('tolerance')" class="p-4 bg-[#111] rounded-2xl cursor-pointer hover:bg-[#222]">
-                                <strong>Understanding Tolerance</strong>
+                                <strong>3. Understanding Tolerance (Step-by-Step)</strong>
                             </div>
                         </div>
                         
@@ -457,12 +458,164 @@
             content.classList.remove('hidden');
             
             if (topic === 'decarb') {
-                content.innerHTML = `<strong>Decarboxylation</strong><br><br>Heating cannabis at 240\u00b0F (115\u00b0C) for 30-40 minutes converts THCA into THC. This is essential for edibles to be psychoactive.`;
+                content.innerHTML = `
+                    <h3 class="text-xl font-semibold mb-4">How Decarboxylation Works (Step-by-Step)</h3>
+                    
+                    <p class="mb-4">Decarboxylation is the process of heating cannabis to convert THCA into THC, making it psychoactive and effective in edibles.</p>
+                    
+                    <h4 class="font-semibold mt-4 mb-2">Step 1: Preheat Your Oven</h4>
+                    <p>Set your oven to 240\u00b0F (115\u00b0C). This is the ideal temperature for most home decarboxylation.</p>
+                    
+                    <h4 class="font-semibold mt-4 mb-2">Step 2: Prepare the Cannabis</h4>
+                    <p>Break up your flower into small pieces (about the size of rice grains). Do not grind it into powder.</p>
+                    
+                    <h4 class="font-semibold mt-4 mb-2">Step 3: Spread on Parchment</h4>
+                    <p>Line a baking tray with parchment paper and spread the cannabis evenly in a single layer.</p>
+                    
+                    <h4 class="font-semibold mt-4 mb-2">Step 4: Bake</h4>
+                    <p>Place in the oven and bake for 30-40 minutes. Stir once halfway through for even heating.</p>
+                    
+                    <h4 class="font-semibold mt-4 mb-2">Step 5: Cool Completely</h4>
+                    <p>Remove from the oven and let it cool fully before using. This prevents burning and preserves potency.</p>
+                `;
             } else if (topic === 'infusion') {
-                content.innerHTML = `<strong>Infusion Methods</strong><br><br>Common methods include butter, coconut oil, and MCT oil. Longer, lower-temperature infusions usually produce better results.`;
+                content.innerHTML = `
+                    <h3 class="text-xl font-semibold mb-4">Infusion Methods Explained (Step-by-Step)</h3>
+                    
+                    <p class="mb-4">Infusion is the process of extracting cannabinoids into a fat or alcohol base so they can be used in recipes.</p>
+                    
+                    <h4 class="font-semibold mt-4 mb-2">Method 1: Butter or Oil Infusion</h4>
+                    <ol class="list-decimal pl-5 mb-4">
+                        <li>Decarboxylate your cannabis first.</li>
+                        <li>Combine cannabis with butter or oil in a slow cooker or double boiler.</li>
+                        <li>Heat on low (around 160-180\u00b0F) for 2-3 hours, stirring occasionally.</li>
+                        <li>Strain through cheesecloth into a clean container.</li>
+                        <li>Store in the fridge or freezer.</li>
+                    </ol>
+                    
+                    <h4 class="font-semibold mt-4 mb-2">Method 2: Quick Stovetop Method</h4>
+                    <ol class="list-decimal pl-5 mb-4">
+                        <li>Decarboxylate your cannabis.</li>
+                        <li>Combine with oil or butter in a saucepan.</li>
+                        <li>Simmer on the lowest heat setting for 45-60 minutes.</li>
+                        <li>Stir frequently and do not let it boil.</li>
+                        <li>Strain and store.</li>
+                    </ol>
+                `;
             } else {
-                content.innerHTML = `<strong>Understanding Tolerance</strong><br><br>Regular use of cannabis can reduce its effects over time. Taking tolerance breaks helps reset your sensitivity.`;
+                content.innerHTML = `
+                    <h3 class="text-xl font-semibold mb-4">Understanding Tolerance (Step-by-Step)</h3>
+                    
+                    <p class="mb-4">Tolerance is your body's reduced response to cannabis after repeated use. Here's how to manage it.</p>
+                    
+                    <h4 class="font-semibold mt-4 mb-2">Step 1: Recognize the Signs</h4>
+                    <p>You need more cannabis to feel the same effects you used to get with smaller amounts.</p>
+                    
+                    <h4 class="font-semibold mt-4 mb-2">Step 2: Understand Why It Happens</h4>
+                    <p>Your cannabinoid receptors become less sensitive with frequent use.</p>
+                    
+                    <h4 class="font-semibold mt-4 mb-2">Step 3: Take a Tolerance Break</h4>
+                    <p>Even a 48-72 hour break can help reset your system. Longer breaks (1-2 weeks) are more effective.</p>
+                    
+                    <h4 class="font-semibold mt-4 mb-2">Step 4: Use Lower Doses After a Break</h4>
+                    <p>Start low again after your break. Your sensitivity will be higher.</p>
+                    
+                    <h4 class="font-semibold mt-4 mb-2">Step 5: Rotate Strains and Methods</h4>
+                    <p>Using different strains and consumption methods can help slow tolerance buildup.</p>
+                `;
             }
+        }
+
+        function getTerpenePairing() {
+            const recipe = document.getElementById('terpene-recipe').value;
+            const flavor = document.getElementById('terpene-flavor').value;
+            
+            let result = `<h3 class="font-semibold mb-3">Recommended Terpenes</h3>`;
+            
+            if (flavor === "citrus") {
+                result += `<p><strong>Limonene</strong> — Bright and uplifting. Great for gummies and beverages.</p>`;
+            } else if (flavor === "earthy") {
+                result += `<p><strong>Myrcene + Caryophyllene</strong> — Relaxing and grounding. Perfect for savory dishes.</p>`;
+            } else {
+                result += `<p><strong>Limonene + Pinene</strong> — Uplifting with a fresh profile. Works well with most recipes.</p>`;
+            }
+            
+            document.getElementById('terpene-result').innerHTML = result;
+            document.getElementById('terpene-result').classList.remove('hidden');
+        }
+
+        function recommendStrain() {
+            const dish = document.getElementById('dish-type').value;
+            const effect = document.getElementById('desired-effect').value;
+            
+            let result = `<h3 class="font-semibold mb-3">Recommended Strains</h3>`;
+            
+            if (effect === "relax") {
+                result += `<p><strong>Granddaddy Purple</strong> or <strong>OG Kush</strong> — Excellent for strong body relaxation.</p>`;
+            } else if (effect === "uplifting") {
+                result += `<p><strong>Sour Diesel</strong> or <strong>Jack Herer</strong> — Great for creative or social recipes.</p>`;
+            } else {
+                result += `<p><strong>Blue Dream</strong> — Balanced hybrid that works with most dishes.</p>`;
+            }
+            
+            document.getElementById('strain-result').innerHTML = result;
+            document.getElementById('strain-result').classList.remove('hidden');
+        }
+
+        function saveJournalEntry() {
+            const entry = {
+                recipe: document.getElementById('journal-recipe').value || "Unnamed Recipe",
+                thc: document.getElementById('journal-thc').value,
+                servings: document.getElementById('journal-servings').value,
+                effects: document.getElementById('journal-effects').value || "No notes",
+                date: new Date().toLocaleDateString()
+            };
+            
+            let entries = JSON.parse(localStorage.getItem('dosingJournal') || '[]');
+            entries.unshift(entry);
+            localStorage.setItem('dosingJournal', JSON.stringify(entries));
+            
+            loadJournalEntries();
+            
+            // Clear form
+            document.getElementById('journal-recipe').value = '';
+            document.getElementById('journal-thc').value = '';
+            document.getElementById('journal-servings').value = '';
+            document.getElementById('journal-effects').value = '';
+        }
+
+        function loadJournalEntries() {
+            const container = document.getElementById('journal-entries');
+            let entries = JSON.parse(localStorage.getItem('dosingJournal') || '[]');
+            
+            if (entries.length === 0) {
+                container.innerHTML = '<p class="text-[#888]">No entries yet. Start logging your edibles!</p>';
+                return;
+            }
+            
+            container.innerHTML = entries.map(e => `
+                <div class="bg-[#1f1f1f] p-4 rounded-2xl">
+                    <strong>${e.recipe}</strong> — ${e.thc}mg total<br>
+                    <span class="text-sm text-[#aaa]">${e.date} • ${e.servings} servings • ${e.effects}</span>
+                </div>
+            `).join('');
+        }
+
+        function calculateYield() {
+            const grams = parseFloat(document.getElementById('grow-yield').value) || 100;
+            const thcPercent = parseFloat(document.getElementById('grow-thc').value) || 18;
+            
+            const totalTHC = grams * (thcPercent / 100) * 1000;
+            const batches10 = Math.floor(totalTHC / 10);
+            const batches20 = Math.floor(totalTHC / 20);
+            
+            document.getElementById('grow-result').innerHTML = `
+                <p><strong>Estimated Total THC:</strong> ${totalTHC.toFixed(0)} mg</p>
+                <p class="mt-3"><strong>You could make approximately:</strong><br>
+                • ${batches10} servings at 10mg each<br>
+                • ${batches20} servings at 20mg each</p>
+            `;
+            document.getElementById('grow-result').classList.remove('hidden');
         }
 
         function initApp() {
