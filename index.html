@@ -81,7 +81,7 @@
                 <div id="recipe" class="tool-section active">
                     <div class="gourmet-card p-8 rounded-3xl max-w-3xl">
                         <h2 class="text-3xl font-semibold mb-2">AI Recipe Generator</h2>
-                        <p class="text-[#aaa] mb-6">Describe what you want and get a full recipe.</p>
+                        <p class="text-[#aaa] mb-6">Describe what you want and get a full recipe in proper format.</p>
                         
                         <div class="mb-6">
                             <label class="block text-sm mb-1.5">Describe your recipe idea</label>
@@ -245,81 +245,115 @@
             const resultBox = document.getElementById('recipe-result');
             
             let title = "Custom Infused Recipe";
+            let opening = "A balanced and flavorful recipe designed for your needs.";
+            let whyItWorks = "This recipe combines great taste with effective cannabinoid delivery.";
             let ingredients = [];
             let instructions = [];
-            let terpeneNote = "Myrcene for relaxation";
-            let dosing = "Start with 5-10mg THC per serving.";
+            let decarb = "Preheat oven to 240\u00b0F (115\u00b0C). Break up flower and spread on parchment. Bake for 30-40 minutes, stirring once halfway. Let cool completely.";
+            let infusion = "Infuse into butter or oil using the decarboxylated flower. Simmer on low for 2-3 hours.";
+            let terpene = "Myrcene + Caryophyllene for relaxing effects.";
+            let strain = "Granddaddy Purple or Blue Dream - balanced hybrid with relaxing body effects.";
+            let dosage = "Start with 5-10mg THC per serving. Effects typically begin in 30-90 minutes and last 4-8 hours.";
 
             if (prompt.includes("chocolate") || prompt.includes("dessert")) {
                 title = "Dark Chocolate Relaxation Truffles";
+                opening = "Rich, earthy dark chocolate truffles designed for deep relaxation and evening wind-down.";
+                whyItWorks = "Dark chocolate masks earthy cannabis flavors while the fat content helps with cannabinoid absorption.";
                 ingredients = [
-                    "200g dark chocolate",
-                    "100ml cannabis-infused coconut oil",
+                    "8 oz dark chocolate (70% cacao)",
+                    "1/4 cup cannabis-infused coconut oil",
                     "2 tbsp cocoa powder",
                     "1 tsp vanilla extract",
                     "Pinch of sea salt"
                 ];
                 instructions = [
-                    "Melt the dark chocolate and infused coconut oil together over low heat.",
-                    "Stir in cocoa powder, vanilla, and salt until smooth.",
-                    "Pour into silicone molds or a lined tray.",
-                    "Refrigerate for 2 hours until set.",
+                    "Melt dark chocolate and infused coconut oil together using a double boiler.",
+                    "Stir in cocoa powder, vanilla extract, and sea salt until completely smooth.",
+                    "Remove from heat and let cool slightly (about 5 minutes).",
+                    "Pour mixture into silicone truffle molds or a lined baking tray.",
+                    "Refrigerate for at least 2 hours until fully set.",
                     "Dust with cocoa powder before serving."
                 ];
-                terpeneNote = "Myrcene + Linalool for deep relaxation.";
+                terpene = "Myrcene and Linalool for deep body relaxation and calm.";
+                strain = "Granddaddy Purple - strong relaxing indica with sweet, earthy notes.";
+                dosage = "Each truffle contains approximately 8-10mg THC. Start with half and wait 2 hours.";
             } 
             else if (prompt.includes("gummy") || prompt.includes("candy")) {
                 title = "Citrus Uplifting Gummies";
+                opening = "Bright and zesty gummies that deliver clear-headed, uplifting effects.";
+                whyItWorks = "Citrus flavors pair perfectly with uplifting terpenes while gelatin provides a clean texture.";
                 ingredients = [
-                    "1 cup fruit juice (orange or lemon)",
-                    "2 tbsp cannabis-infused honey or tincture",
-                    "2 tbsp gelatin powder",
-                    "2 tbsp sugar"
+                    "1 cup fresh orange or lemon juice",
+                    "3 tbsp cannabis-infused honey or tincture",
+                    "2 tbsp unflavored gelatin",
+                    "2 tbsp organic sugar"
                 ];
                 instructions = [
-                    "Heat juice and sugar in a saucepan.",
-                    "Sprinkle in gelatin and whisk until dissolved.",
-                    "Remove from heat and stir in infused honey/tincture.",
-                    "Pour into silicone gummy molds.",
-                    "Refrigerate for 1-2 hours until firm."
+                    "Combine juice and sugar in a small saucepan over medium heat.",
+                    "Sprinkle gelatin over the mixture and whisk until fully dissolved.",
+                    "Remove from heat and stir in the infused honey or tincture.",
+                    "Carefully pour into silicone gummy molds.",
+                    "Refrigerate for 1-2 hours until completely firm.",
+                    "Pop gummies out of molds and store in an airtight container."
                 ];
-                terpeneNote = "Limonene for uplifting effects.";
+                terpene = "Limonene for mood elevation and mental clarity.";
+                strain = "Sour Diesel or Jack Herer - uplifting sativas with citrus notes.";
+                dosage = "Each gummy is approximately 5-7mg THC. Start with one and wait 90 minutes.";
             } 
             else {
-                title = "Savory Herb-Infused Dish";
+                title = "Savory Herb-Infused Mushroom Dish";
+                opening = "A comforting savory dish with earthy flavors and relaxing effects.";
+                whyItWorks = "Mushrooms and herbs naturally complement earthy cannabis strains while fat from oil aids absorption.";
                 ingredients = [
                     "2 tbsp cannabis-infused olive oil",
-                    "500g mushrooms or vegetables",
-                    "3 cloves garlic",
-                    "Fresh herbs (rosemary/thyme)",
-                    "Salt & pepper to taste"
+                    "1 lb mixed mushrooms",
+                    "4 cloves garlic, minced",
+                    "2 tsp fresh rosemary and thyme",
+                    "Salt and black pepper to taste"
                 ];
                 instructions = [
-                    "Saut\u00e9 garlic in infused olive oil.",
-                    "Add mushrooms/vegetables and cook until tender.",
-                    "Season with herbs, salt, and pepper.",
-                    "Serve warm."
+                    "Heat infused olive oil in a large skillet over medium heat.",
+                    "Add minced garlic and saut\u00e9 for 1 minute until fragrant.",
+                    "Add mushrooms and cook for 8-10 minutes until golden and tender.",
+                    "Stir in fresh herbs, salt, and pepper. Cook for another 2 minutes.",
+                    "Remove from heat and serve warm."
                 ];
-                terpeneNote = "Caryophyllene + Myrcene for grounding effects.";
+                terpene = "Myrcene and Caryophyllene for grounding and body relaxation.";
+                strain = "OG Kush or Granddaddy Purple - relaxing indicas with earthy profiles.";
+                dosage = "This dish serves 4. Each serving contains approximately 10-12mg THC.";
             }
 
             let html = `
                 <h3 class="text-2xl font-semibold mb-4">${title}</h3>
-                
-                <h4 class="font-semibold mt-4 mb-2">Ingredients:</h4>
+                <p class="mb-6 text-[#aaa]">${opening}</p>
+
+                <h4 class="font-semibold mb-2">Why It Works</h4>
+                <p class="mb-4">${whyItWorks}</p>
+
+                <h4 class="font-semibold mb-2">Complementary Terpenes</h4>
+                <p class="mb-4">${terpene}</p>
+
+                <h4 class="font-semibold mb-2">Ingredients</h4>
                 <ul class="list-disc pl-5 mb-4">
                     ${ingredients.map(item => `<li>${item}</li>`).join('')}
                 </ul>
-                
-                <h4 class="font-semibold mb-2">Instructions:</h4>
+
+                <h4 class="font-semibold mb-2">Instructions</h4>
                 <ol class="list-decimal pl-5 mb-4">
                     ${instructions.map(step => `<li>${step}</li>`).join('')}
                 </ol>
-                
-                <div class="mt-4 p-4 bg-[#1f1f1f] rounded-xl">
-                    <p><strong>Terpene Pairing:</strong> ${terpeneNote}</p>
-                    <p class="mt-1"><strong>Dosing:</strong> ${dosing}</p>
-                </div>
+
+                <h4 class="font-semibold mb-2">Decarboxylation</h4>
+                <p class="mb-4">${decarb}</p>
+
+                <h4 class="font-semibold mb-2">Infusion Method</h4>
+                <p class="mb-4">${infusion}</p>
+
+                <h4 class="font-semibold mb-2">Strain Suggestion</h4>
+                <p class="mb-4">${strain}</p>
+
+                <h4 class="font-semibold mb-2">Dosage</h4>
+                <p>${dosage}</p>
             `;
 
             resultBox.innerHTML = html;
