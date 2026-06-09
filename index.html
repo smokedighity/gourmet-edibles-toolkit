@@ -213,7 +213,7 @@
                 <div id="strain" class="tool-section">
                     <div class="gourmet-card p-8 rounded-3xl max-w-3xl">
                         <h2 class="text-3xl font-semibold mb-2">Strain Recommender</h2>
-                        <p class="text-[#aaa] mb-6">Get strain suggestions based on what you're making.</p>
+                        <p class="text-[#aaa] mb-6">Get popular strain recommendations.</p>
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
@@ -236,7 +236,7 @@
                             </div>
                         </div>
                         
-                        <button onclick="recommendStrain()" class="mt-6 w-full bg-emerald-600 py-4 rounded-2xl font-semibold">RECOMMEND STRAINS</button>
+                        <button onclick="recommendStrain()" class="mt-6 w-full bg-emerald-600 py-4 rounded-2xl font-semibold">SHOW 20 POPULAR STRAINS</button>
                         
                         <div id="strain-result" class="mt-6 hidden result-box p-6 rounded-2xl"></div>
                     </div>
@@ -331,7 +331,6 @@
             
             const resultBox = document.getElementById('recipe-result');
             
-            // Generate recipe based on selections
             let title = "Custom Infused Recipe";
             let opening = "A recipe tailored to your selected preferences.";
             let whyItWorks = "This recipe is designed for good flavor and effective dosing.";
@@ -343,7 +342,6 @@
             let strain = "Recommended strain based on your choices.";
             let dosageNote = "Follow your selected dose level. Start low and go slow.";
 
-            // Basic logic based on selections
             if (recipeStyle === "chocolate" && desiredEffect === "deep-relaxation") {
                 title = "Deep Relaxation Dark Chocolate Truffles";
                 opening = "Rich dark chocolate truffles designed for strong relaxation.";
@@ -367,7 +365,6 @@
                 strain = strainType.replace('-', ' ');
             }
 
-            // Adjust dosage note based on selection
             if (dose === "micro") dosageNote = "Microdose range (2-5mg THC). Very subtle effects.";
             else if (dose === "macro") dosageNote = "Macro dose (200mg+). Use with extreme caution and experience.";
             else dosageNote = "Follow your selected dose level carefully.";
@@ -432,19 +429,44 @@
         function recommendStrain() {
             const dish = document.getElementById('dish-type').value;
             const effect = document.getElementById('desired-effect2').value;
+            const resultBox = document.getElementById('strain-result');
             
-            let result = `<h3 class="font-semibold mb-3">Recommended Strains</h3>`;
+            // List of 20 popular strains
+            const popularStrains = [
+                "Granddaddy Purple", "OG Kush", "Blue Dream", "Sour Diesel", "Jack Herer",
+                "Girl Scout Cookies", "Wedding Cake", "Gelato", "Runtz", "Zkittlez",
+                "Northern Lights", "Purple Punch", "Bruce Banner", "Durban Poison", "Maui Wowie",
+                "Bubba Kush", "Trainwreck", "Pineapple Express", "AK-47", "White Widow"
+            ];
             
-            if (effect === "relax") {
-                result += `<p><strong>Granddaddy Purple</strong> or <strong>OG Kush</strong> — Excellent for strong body relaxation.</p>`;
-            } else if (effect === "uplifting") {
-                result += `<p><strong>Sour Diesel</strong> or <strong>Jack Herer</strong> — Great for creative or social recipes.</p>`;
+            let recommendations = [];
+            
+            // Simple filtering based on effect
+            if (effect === "relax" || effect === "body") {
+                recommendations = popularStrains.filter(s => 
+                    s.includes("Purple") || s.includes("Kush") || s.includes("Gelato") || s.includes("Wedding") || s.includes("Bubba")
+                );
+            } else if (effect === "uplifting" || effect === "focused") {
+                recommendations = popularStrains.filter(s => 
+                    s.includes("Sour") || s.includes("Jack") || s.includes("Durban") || s.includes("Pineapple") || s.includes("Maui")
+                );
             } else {
-                result += `<p><strong>Blue Dream</strong> — Balanced hybrid that works with most dishes.</p>`;
+                recommendations = popularStrains;
             }
             
-            document.getElementById('strain-result').innerHTML = result;
-            document.getElementById('strain-result').classList.remove('hidden');
+            // Limit to 20 and shuffle a bit for variety
+            recommendations = recommendations.slice(0, 20);
+            
+            let html = `<h3 class="font-semibold mb-4">20 Popular Strain Recommendations</h3><div class="grid grid-cols-2 md:grid-cols-3 gap-2 text-sm">`;
+            
+            recommendations.forEach(strain => {
+                html += `<div class="bg-[#1f1f1f] px-3 py-2 rounded-xl">${strain}</div>`;
+            });
+            
+            html += `</div>`;
+            
+            resultBox.innerHTML = html;
+            resultBox.classList.remove('hidden');
         }
 
         function saveJournalEntry() {
@@ -594,19 +616,226 @@
         function recommendStrain() {
             const dish = document.getElementById('dish-type').value;
             const effect = document.getElementById('desired-effect2').value;
+            const resultBox = document.getElementById('strain-result');
             
-            let result = `<h3 class="font-semibold mb-3">Recommended Strains</h3>`;
+            // List of 20 popular strains
+            const popularStrains = [
+                "Granddaddy Purple", "OG Kush", "Blue Dream", "Sour Diesel", "Jack Herer",
+                "Girl Scout Cookies", "Wedding Cake", "Gelato", "Runtz", "Zkittlez",
+                "Northern Lights", "Purple Punch", "Bruce Banner", "Durban Poison", "Maui Wowie",
+                "Bubba Kush", "Trainwreck", "Pineapple Express", "AK-47", "White Widow"
+            ];
             
-            if (effect === "relax") {
-                result += `<p><strong>Granddaddy Purple</strong> or <strong>OG Kush</strong> — Excellent for strong body relaxation.</p>`;
-            } else if (effect === "uplifting") {
-                result += `<p><strong>Sour Diesel</strong> or <strong>Jack Herer</strong> — Great for creative or social recipes.</p>`;
+            let recommendations = [];
+            
+            if (effect === "relax" || effect === "body") {
+                recommendations = popularStrains.filter(s => 
+                    s.includes("Purple") || s.includes("Kush") || s.includes("Gelato") || s.includes("Wedding") || s.includes("Bubba")
+                );
+            } else if (effect === "uplifting" || effect === "focused") {
+                recommendations = popularStrains.filter(s => 
+                    s.includes("Sour") || s.includes("Jack") || s.includes("Durban") || s.includes("Pineapple") || s.includes("Maui")
+                );
             } else {
-                result += `<p><strong>Blue Dream</strong> — Balanced hybrid that works with most dishes.</p>`;
+                recommendations = popularStrains;
             }
             
-            document.getElementById('strain-result').innerHTML = result;
-            document.getElementById('strain-result').classList.remove('hidden');
+            recommendations = recommendations.slice(0, 20);
+            
+            let html = `<h3 class="font-semibold mb-4">20 Popular Strain Recommendations</h3><div class="grid grid-cols-2 md:grid-cols-3 gap-2 text-sm">`;
+            
+            recommendations.forEach(strain => {
+                html += `<div class="bg-[#1f1f1f] px-3 py-2 rounded-xl">${strain}</div>`;
+            });
+            
+            html += `</div>`;
+            
+            resultBox.innerHTML = html;
+            resultBox.classList.remove('hidden');
+        }
+
+        function saveJournalEntry() {
+            const entry = {
+                recipe: document.getElementById('journal-recipe').value || "Unnamed Recipe",
+                thc: document.getElementById('journal-thc').value,
+                servings: document.getElementById('journal-servings').value,
+                effects: document.getElementById('journal-effects').value || "No notes",
+                date: new Date().toLocaleDateString()
+            };
+            
+            let entries = JSON.parse(localStorage.getItem('dosingJournal') || '[]');
+            entries.unshift(entry);
+            localStorage.setItem('dosingJournal', JSON.stringify(entries));
+            
+            loadJournalEntries();
+            
+            // Clear form
+            document.getElementById('journal-recipe').value = '';
+            document.getElementById('journal-thc').value = '';
+            document.getElementById('journal-servings').value = '';
+            document.getElementById('journal-effects').value = '';
+        }
+
+        function loadJournalEntries() {
+            const container = document.getElementById('journal-entries');
+            let entries = JSON.parse(localStorage.getItem('dosingJournal') || '[]');
+            
+            if (entries.length === 0) {
+                container.innerHTML = '<p class="text-[#888]">No entries yet. Start logging your edibles!</p>';
+                return;
+            }
+            
+            container.innerHTML = entries.map(e => `
+                <div class="bg-[#1f1f1f] p-4 rounded-2xl">
+                    <strong>${e.recipe}</strong> — ${e.thc}mg total<br>
+                    <span class="text-sm text-[#aaa]">${e.date} • ${e.servings} servings • ${e.effects}</span>
+                </div>
+            `).join('');
+        }
+
+        function calculateYield() {
+            const grams = parseFloat(document.getElementById('grow-yield').value) || 100;
+            const thcPercent = parseFloat(document.getElementById('grow-thc').value) || 18;
+            
+            const totalTHC = grams * (thcPercent / 100) * 1000;
+            const batches10 = Math.floor(totalTHC / 10);
+            const batches20 = Math.floor(totalTHC / 20);
+            
+            document.getElementById('grow-result').innerHTML = `
+                <p><strong>Estimated Total THC:</strong> ${totalTHC.toFixed(0)} mg</p>
+                <p class="mt-3"><strong>You could make approximately:</strong><br>
+                • ${batches10} servings at 10mg each<br>
+                • ${batches20} servings at 20mg each</p>
+            `;
+            document.getElementById('grow-result').classList.remove('hidden');
+        }
+
+        function showEducation(topic) {
+            const content = document.getElementById('education-content');
+            content.classList.remove('hidden');
+            
+            if (topic === 'decarb') {
+                content.innerHTML = `
+                    <h3 class="text-xl font-semibold mb-4">How Decarboxylation Works (Step-by-Step)</h3>
+                    <p class="mb-4">Decarboxylation is the essential process of heating cannabis to convert THCA into THC so it becomes psychoactive and effective in edibles.</p>
+                    
+                    <h4 class="font-semibold mt-4 mb-2">Step 1: Preheat Your Oven</h4>
+                    <p>Set your oven to exactly 240\u00b0F (115\u00b0C). This temperature is ideal for converting THCA without destroying too many terpenes.</p>
+                    
+                    <h4 class="font-semibold mt-4 mb-2">Step 2: Prepare the Cannabis</h4>
+                    <p>Break your cannabis flower into small pieces roughly the size of rice grains. Avoid grinding it into a fine powder.</p>
+                    
+                    <h4 class="font-semibold mt-4 mb-2">Step 3: Spread Evenly</h4>
+                    <p>Line a baking tray with parchment paper and spread the cannabis in a single, even layer.</p>
+                    
+                    <h4 class="font-semibold mt-4 mb-2">Step 4: Bake</h4>
+                    <p>Place the tray in the oven and bake for 30-40 minutes. Stir the cannabis once halfway through for even decarboxylation.</p>
+                    
+                    <h4 class="font-semibold mt-4 mb-2">Step 5: Cool Completely</h4>
+                    <p>Remove from the oven and let it cool fully at room temperature before using in any recipe. This preserves potency and prevents burning.</p>
+                `;
+            } else if (topic === 'infusion') {
+                content.innerHTML = `
+                    <h3 class="text-xl font-semibold mb-4">Infusion Methods Explained (Step-by-Step)</h3>
+                    <p class="mb-4">Infusion extracts cannabinoids from decarboxylated cannabis into a fat or alcohol base so it can be used in edible recipes.</p>
+                    
+                    <h4 class="font-semibold mt-4 mb-2">Best Method: Slow Cooker / Crockpot</h4>
+                    <ol class="list-decimal pl-5 mb-4">
+                        <li>Decarboxylate your cannabis first.</li>
+                        <li>Combine the cannabis with butter, coconut oil, or olive oil in a slow cooker.</li>
+                        <li>Set to low heat (around 160-180\u00b0F) and cook for 2-3 hours, stirring occasionally.</li>
+                        <li>Strain the mixture through cheesecloth into a clean jar.</li>
+                        <li>Store in the refrigerator or freezer.</li>
+                    </ol>
+                    
+                    <h4 class="font-semibold mt-4 mb-2">Quick Stovetop Method</h4>
+                    <ol class="list-decimal pl-5 mb-4">
+                        <li>Decarboxylate your cannabis.</li>
+                        <li>Combine cannabis and oil/butter in a saucepan.</li>
+                        <li>Heat on the lowest possible setting for 45-60 minutes. Do not let it boil.</li>
+                        <li>Stir frequently.</li>
+                        <li>Strain and store.</li>
+                    </ol>
+                `;
+            } else {
+                content.innerHTML = `
+                    <h3 class="text-xl font-semibold mb-4">Understanding Tolerance (Step-by-Step)</h3>
+                    <p class="mb-4">Tolerance occurs when your body becomes less responsive to cannabis after repeated use. Here's how to manage it effectively.</p>
+                    
+                    <h4 class="font-semibold mt-4 mb-2">Step 1: Recognize the Signs</h4>
+                    <p>You need significantly more cannabis than before to feel the same effects.</p>
+                    
+                    <h4 class="font-semibold mt-4 mb-2">Step 2: Understand the Cause</h4>
+                    <p>Your cannabinoid receptors (especially CB1) become desensitized with frequent activation.</p>
+                    
+                    <h4 class="font-semibold mt-4 mb-2">Step 3: Take a Tolerance Break</h4>
+                    <p>Even a short 48-72 hour break can help. For best results, take 5-14 days off.</p>
+                    
+                    <h4 class="font-semibold mt-4 mb-2">Step 4: Reset Your System</h4>
+                    <p>During a break, avoid all cannabis products. Exercise, hydration, and good sleep help speed up the reset.</p>
+                    
+                    <h4 class="font-semibold mt-4 mb-2">Step 5: Return Slowly</h4>
+                    <p>When resuming, start with lower doses than you were using before the break. Your sensitivity will be higher.</p>
+                `;
+            }
+        }
+
+        function getTerpenePairing() {
+            const recipe = document.getElementById('terpene-recipe').value;
+            const flavor = document.getElementById('terpene-flavor').value;
+            
+            let result = `<h3 class="font-semibold mb-3">Recommended Terpenes</h3>`;
+            
+            if (flavor === "citrus") {
+                result += `<p><strong>Limonene</strong> — Bright and uplifting. Great for gummies and beverages.</p>`;
+            } else if (flavor === "earthy") {
+                result += `<p><strong>Myrcene + Caryophyllene</strong> — Relaxing and grounding. Perfect for savory dishes.</p>`;
+            } else {
+                result += `<p><strong>Limonene + Pinene</strong> — Uplifting with a fresh profile. Works well with most recipes.</p>`;
+            }
+            
+            document.getElementById('terpene-result').innerHTML = result;
+            document.getElementById('terpene-result').classList.remove('hidden');
+        }
+
+        function recommendStrain() {
+            const dish = document.getElementById('dish-type').value;
+            const effect = document.getElementById('desired-effect2').value;
+            const resultBox = document.getElementById('strain-result');
+            
+            const popularStrains = [
+                "Granddaddy Purple", "OG Kush", "Blue Dream", "Sour Diesel", "Jack Herer",
+                "Girl Scout Cookies", "Wedding Cake", "Gelato", "Runtz", "Zkittlez",
+                "Northern Lights", "Purple Punch", "Bruce Banner", "Durban Poison", "Maui Wowie",
+                "Bubba Kush", "Trainwreck", "Pineapple Express", "AK-47", "White Widow"
+            ];
+            
+            let recommendations = [];
+            
+            if (effect === "relax" || effect === "body") {
+                recommendations = popularStrains.filter(s => 
+                    s.includes("Purple") || s.includes("Kush") || s.includes("Gelato") || s.includes("Wedding") || s.includes("Bubba")
+                );
+            } else if (effect === "uplifting" || effect === "focused") {
+                recommendations = popularStrains.filter(s => 
+                    s.includes("Sour") || s.includes("Jack") || s.includes("Durban") || s.includes("Pineapple") || s.includes("Maui")
+                );
+            } else {
+                recommendations = popularStrains;
+            }
+            
+            recommendations = recommendations.slice(0, 20);
+            
+            let html = `<h3 class="font-semibold mb-4">20 Popular Strain Recommendations</h3><div class="grid grid-cols-2 md:grid-cols-3 gap-2 text-sm">`;
+            
+            recommendations.forEach(strain => {
+                html += `<div class="bg-[#1f1f1f] px-3 py-2 rounded-xl">${strain}</div>`;
+            });
+            
+            html += `</div>`;
+            
+            resultBox.innerHTML = html;
+            resultBox.classList.remove('hidden');
         }
 
         function saveJournalEntry() {
