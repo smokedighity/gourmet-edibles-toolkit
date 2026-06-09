@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gourmet Edibles Toolkit • Chef Smoke</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        .heading-serif { font-family: 'Playfair Display', Georgia, serif; }
+        .gourmet-card { background: #1a1a1a; border: 1px solid #333; }
+        .nav-item { transition: all 0.2s ease; }
+        .nav-item.active { background-color: #d4af37; color: #111; font-weight: 600; }
+        .tool-section { display: none; }
+        .tool-section.active { display: block; }
+        .result-box { background: #111; border: 1px solid #444; }
+    </style>
+</head>
+<body class="bg-[#0f0f0f] text-white">
+    <!-- Header -->
+    <header class="border-b border-[#333] bg-[#111]">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-x-3">
+                <div class="w-11 h-11 bg-[#d4af37] rounded-full flex items-center justify-center">
+                    <i class="fa-solid fa-utensils text-[#111] text-2xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-3xl font-bold heading-serif tracking-tight">Gourmet Edibles</h1>
+                    <p class="text-xs text-[#d4af37] -mt-1">CHEF SMOKE • CHICAGO</p>
+                </div>
+            </div>
+            <div class="text-sm text-[#888]">Reader Tools</div>
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-6 pt-6 pb-16">
+        <div class="flex flex-col lg:flex-row gap-8">
+            
+            <!-- Vertical Navigation -->
+            <div class="lg:w-72 flex-shrink-0">
+                <div class="sticky top-6">
+                    <h3 class="text-sm font-semibold text-[#888] mb-3 px-3">READER TOOLS</h3>
+                    
+                    <div onclick="showSection('recipe')" class="nav-item flex items-center gap-x-3 px-4 py-3 rounded-2xl mb-1 cursor-pointer hover:bg-[#1f1f1f] active" id="nav-recipe">
+                        <i class="fa-solid fa-magic w-5 text-emerald-400"></i>
+                        <span>AI Recipe Generator</span>
+                    </div>
+                    
+                    <div onclick="showSection('terpene')" class="nav-item flex items-center gap-x-3 px-4 py-3 rounded-2xl mb-1 cursor-pointer hover:bg-[#1f1f1f]" id="nav-terpene">
+                        <i class="fa-solid fa-leaf w-5 text-emerald-400"></i>
+                        <span>Terpene Pairing Tool</span>
+                    </div>
+                    
+                    <div onclick="showSection('strain')" class="nav-item flex items-center gap-x-3 px-4 py-3 rounded-2xl mb-1 cursor-pointer hover:bg-[#1f1f1f]" id="nav-strain">
+                        <i class="fa-solid fa-seedling w-5 text-emerald-400"></i>
+                        <span>Strain Recommender</span>
+                    </div>
+                    
+                    <div onclick="showSection('journal')" class="nav-item flex items-center gap-x-3 px-4 py-3 rounded-2xl mb-1 cursor-pointer hover:bg-[#1f1f1f]" id="nav-journal">
+                        <i class="fa-solid fa-book w-5 text-emerald-400"></i>
+                        <span>Dosing Journal</span>
+                    </div>
+                    
+                    <div onclick="showSection('grow')" class="nav-item flex items-center gap-x-3 px-4 py-3 rounded-2xl mb-1 cursor-pointer hover:bg-[#1f1f1f]" id="nav-grow">
+                        <i class="fa-solid fa-seedling w-5 text-emerald-400"></i>
+                        <span>Grow to Kitchen</span>
+                    </div>
+                    
+                    <div onclick="showSection('education')" class="nav-item flex items-center gap-x-3 px-4 py-3 rounded-2xl mb-1 cursor-pointer hover:bg-[#1f1f1f]" id="nav-education">
+                        <i class="fa-solid fa-graduation-cap w-5 text-emerald-400"></i>
+                        <span>Education Hub</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="flex-1 min-w-0">
+                
+                <!-- AI Recipe Generator -->
+                <div id="recipe" class="tool-section active">
+                    <div class="gourmet-card p-8 rounded-3xl max-w-3xl">
+                        <h2 class="text-3xl font-semibold mb-2">AI Recipe Generator</h2>
+                        <p class="text-[#aaa] mb-6">Get original recipes made for your preferences.</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm mb-1.5">Recipe Style</label>
+                                <select id="recipe-style" class="w-full bg-[#111] border border-[#444] rounded-xl px-4 py-3">
+                                    <option value="sweet">Sweet / Dessert</option>
+                                    <option value="savory">Savory</option>
+                                    <option value="gummy">Gummies</option>
+                                    <option value="drink">Beverage</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm mb-1.5">Desired Effects</label>
+                                <select id="recipe-effects" class="w-full bg-[#111] border border-[#444] rounded-xl px-4 py-3">
+                                    <option value="relax">Relaxation</option>
+                                    <option value="focus">Focus / Creativity</option>
+                                    <option value="euphoria">Euphoria</option>
+                                    <option value="pain">Pain Relief</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <button onclick="generateRecipe()" class="mt-6 w-full bg-[#d4af37] text-[#111] py-4 rounded-2xl font-semibold">GENERATE RECIPE</button>
+                        
+                        <div id="recipe-result" class="mt-6 hidden result-box p-6 rounded-2xl"></div>
+                    </div>
+                </div>
+
+                <!-- Terpene Pairing Tool -->
+                <div id="terpene" class="tool-section">
+                    <div class="gourmet-card p-8 rounded-3xl max-w-3xl">
+                        <h2 class="text-3xl font-semibold mb-2">Terpene & Flavor Pairing</h2>
+                        <p class="text-[#aaa] mb-6">Find the best terpenes for your recipe.</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm mb-1.5">Recipe Type</label>
+                                <select id="terpene-recipe" class="w-full bg-[#111] border border-[#444] rounded-xl px-4 py-3">
+                                    <option value="chocolate">Chocolate</option>
+                                    <option value="gummy">Gummies</option>
+                                    <option value="savory">Savory Dish</option>
+                                    <option value="drink">Beverage</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm mb-1.5">Main Flavor Goal</label>
+                                <select id="terpene-flavor" class="w-full bg-[#111] border border-[#444] rounded-xl px-4 py-3">
+                                    <option value="citrus">Citrus / Bright</option>
+                                    <option value="earthy">Earthy / Herbal</option>
+                                    <option value="sweet">Sweet / Creamy</option>
+                                    <option value="spicy">Spicy / Warm</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <button onclick="getTerpenePairing()" class="mt-6 w-full bg-emerald-600 py-4 rounded-2xl font-semibold">FIND PAIRINGS</button>
+                        
+                        <div id="terpene-result" class="mt-6 hidden result-box p-6 rounded-2xl"></div>
+                    </div>
+                </div>
+
+                <!-- Strain Recommender -->
+                <div id="strain" class="tool-section">
+                    <div class="gourmet-card p-8 rounded-3xl max-w-3xl">
+                        <h2 class="text-3xl font-semibold mb-2">Strain Recommender</h2>
+                        <p class="text-[#aaa] mb-6">Get strain suggestions based on what you're making.</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm mb-1.5">Type of Dish</label>
+                                <select id="dish-type" class="w-full bg-[#111] border border-[#444] rounded-xl px-4 py-3">
+                                    <option value="dessert">Dessert</option>
+                                    <option value="savory">Savory Meal</option>
+                                    <option value="gummy">Gummies</option>
+                                    <option value="drink">Drink</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm mb-1.5">Desired Effect</label>
+                                <select id="desired-effect" class="w-full bg-[#111] border border-[#444] rounded-xl px-4 py-3">
+                                    <option value="relax">Relax</option>
+                                    <option value="uplifting">Uplifting</option>
+                                    <option value="focused">Focused</option>
+                                    <option value="body">Strong Body High</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <button onclick="recommendStrain()" class="mt-6 w-full bg-emerald-600 py-4 rounded-2xl font-semibold">RECOMMEND STRAINS</button>
+                        
+                        <div id="strain-result" class="mt-6 hidden result-box p-6 rounded-2xl"></div>
+                    </div>
+                </div>
+
+                <!-- Dosing Journal -->
+                <div id="journal" class="tool-section">
+                    <div class="gourmet-card p-8 rounded-3xl max-w-3xl">
+                        <h2 class="text-3xl font-semibold mb-2">Dosing Journal</h2>
+                        <p class="text-[#aaa] mb-6">Track what you make and how it affects you.</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <input id="journal-recipe" placeholder="Recipe Name" class="bg-[#111] border border-[#444] rounded-xl px-4 py-3">
+                            <input id="journal-thc" type="number" placeholder="Total THC (mg)" class="bg-[#111] border border-[#444] rounded-xl px-4 py-3">
+                            <input id="journal-servings" type="number" placeholder="Servings Made" class="bg-[#111] border border-[#444] rounded-xl px-4 py-3">
+                            <input id="journal-effects" placeholder="How did it feel?" class="bg-[#111] border border-[#444] rounded-xl px-4 py-3">
+                        </div>
+                        
+                        <button onclick="saveJournalEntry()" class="mt-4 w-full bg-emerald-600 py-3 rounded-2xl font-semibold">SAVE ENTRY</button>
+                        
+                        <div class="mt-6">
+                            <h4 class="font-semibold mb-3">Your Past Entries</h4>
+                            <div id="journal-entries" class="space-y-3 text-sm"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grow to Kitchen -->
+                <div id="grow" class="tool-section">
+                    <div class="gourmet-card p-8 rounded-3xl max-w-2xl">
+                        <h2 class="text-3xl font-semibold mb-2">Grow → Kitchen Calculator</h2>
+                        <p class="text-[#aaa] mb-6">See how many edibles you can make from your harvest.</p>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm mb-1.5">Expected Dry Yield (grams)</label>
+                                <input id="grow-yield" type="number" value="100" class="w-full bg-[#111] border border-[#444] rounded-xl px-4 py-3">
+                            </div>
+                            <div>
+                                <label class="block text-sm mb-1.5">Average THC %</label>
+                                <input id="grow-thc" type="number" value="18" class="w-full bg-[#111] border border-[#444] rounded-xl px-4 py-3">
+                            </div>
+                        </div>
+                        
+                        <button onclick="calculateYield()" class="mt-6 w-full bg-emerald-600 py-4 rounded-2xl font-semibold">CALCULATE</button>
+                        
+                        <div id="grow-result" class="mt-6 hidden result-box p-6 rounded-2xl"></div>
+                    </div>
+                </div>
+
+                <!-- Education Hub -->
+                <div id="education" class="tool-section">
+                    <div class="gourmet-card p-8 rounded-3xl max-w-3xl">
+                        <h2 class="text-3xl font-semibold mb-6">Education Hub</h2>
+                        
+                        <div class="space-y-3">
+                            <div onclick="showEducation('decarb')" class="p-4 bg-[#111] rounded-2xl cursor-pointer hover:bg-[#222]">
+                                <strong>How Decarboxylation Works</strong>
+                            </div>
+                            <div onclick="showEducation('infusion')" class="p-4 bg-[#111] rounded-2xl cursor-pointer hover:bg-[#222]">
+                                <strong>Infusion Methods Explained</strong>
+                            </div>
+                            <div onclick="showEducation('tolerance')" class="p-4 bg-[#111] rounded-2xl cursor-pointer hover:bg-[#222]">
+                                <strong>Understanding Tolerance</strong>
+                            </div>
+                        </div>
+                        
+                        <div id="education-content" class="mt-6 hidden result-box p-6 rounded-2xl"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(section) {
+            document.querySelectorAll('.tool-section').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById(section).classList.add('active');
+            document.getElementById('nav-' + section).classList.add('active');
+        }
+
+        function generateRecipe() {
+            const style = document.getElementById('recipe-style').value;
+            const effect = document.getElementById('recipe-effects').value;
+            
+            let title = "";
+            let description = "";
+
+            if (style === "sweet" && effect === "relax") {
+                title = "Granddaddy Purple Chocolate Truffles";
+                description = "Rich dark chocolate truffles with deep body relaxation. Earthy and slightly sweet.";
+            } else if (style === "savory" && effect === "focus") {
+                title = "Sour Diesel Infused Mushroom Pasta";
+                description = "Savory mushroom pasta with uplifting and focused effects.";
+            } else if (style === "gummy" && effect === "euphoria") {
+                title = "Blue Dream Citrus Gummies";
+                description = "Bright, euphoric gummies with balanced hybrid effects.";
+            } else {
+                title = `${style.charAt(0).toUpperCase() + style.slice(1)} Infused Recipe`;
+                description = `A balanced ${style} recipe designed for ${effect} effects.`;
+            }
+
+            const resultHTML = `
+                <h3 class="font-semibold text-xl mb-2">${title}</h3>
+                <p class="text-[#aaa]">${description}</p>
+                <p class="mt-4 text-sm">Use complementary terpenes and start with a low dose (5-10mg THC per serving).</p>
+            `;
+            
+            document.getElementById('recipe-result').innerHTML = resultHTML;
+            document.getElementById('recipe-result').classList.remove('hidden');
+        }
+
+        function getTerpenePairing() {
+            const recipe = document.getElementById('terpene-recipe').value;
+            const flavor = document.getElementById('terpene-flavor').value;
+            
+            let result = `<h3 class="font-semibold mb-3">Recommended Terpenes</h3>`;
+            
+            if (flavor === "citrus") {
+                result += `<p><strong>Limonene</strong> — Bright and uplifting. Great for gummies and beverages.</p>`;
+            } else if (flavor === "earthy") {
+                result += `<p><strong>Myrcene + Caryophyllene</strong> — Relaxing and grounding. Perfect for savory dishes.</p>`;
+            } else {
+                result += `<p><strong>Limonene + Pinene</strong> — Uplifting with a fresh profile. Works well with most recipes.</p>`;
+            }
+            
+            document.getElementById('terpene-result').innerHTML = result;
+            document.getElementById('terpene-result').classList.remove('hidden');
+        }
+
+        function recommendStrain() {
+            const dish = document.getElementById('dish-type').value;
+            const effect = document.getElementById('desired-effect').value;
+            
+            let result = `<h3 class="font-semibold mb-3">Recommended Strains</h3>`;
+            
+            if (effect === "relax") {
+                result += `<p><strong>Granddaddy Purple</strong> or <strong>OG Kush</strong> — Excellent for strong body relaxation.</p>`;
+            } else if (effect === "uplifting") {
+                result += `<p><strong>Sour Diesel</strong> or <strong>Jack Herer</strong> — Great for creative or social recipes.</p>`;
+            } else {
+                result += `<p><strong>Blue Dream</strong> — Balanced hybrid that works with most dishes.</p>`;
+            }
+            
+            document.getElementById('strain-result').innerHTML = result;
+            document.getElementById('strain-result').classList.remove('hidden');
+        }
+
+        function saveJournalEntry() {
+            const entry = {
+                recipe: document.getElementById('journal-recipe').value || "Unnamed Recipe",
+                thc: document.getElementById('journal-thc').value,
+                servings: document.getElementById('journal-servings').value,
+                effects: document.getElementById('journal-effects').value || "No notes",
+                date: new Date().toLocaleDateString()
+            };
+            
+            let entries = JSON.parse(localStorage.getItem('dosingJournal') || '[]');
+            entries.unshift(entry);
+            localStorage.setItem('dosingJournal', JSON.stringify(entries));
+            
+            loadJournalEntries();
+            
+            // Clear form
+            document.getElementById('journal-recipe').value = '';
+            document.getElementById('journal-thc').value = '';
+            document.getElementById('journal-servings').value = '';
+            document.getElementById('journal-effects').value = '';
+        }
+
+        function loadJournalEntries() {
+            const container = document.getElementById('journal-entries');
+            let entries = JSON.parse(localStorage.getItem('dosingJournal') || '[]');
+            
+            if (entries.length === 0) {
+                container.innerHTML = '<p class="text-[#888]">No entries yet. Start logging your edibles!</p>';
+                return;
+            }
+            
+            container.innerHTML = entries.map(e => `
+                <div class="bg-[#1f1f1f] p-4 rounded-2xl">
+                    <strong>${e.recipe}</strong> — ${e.thc}mg total<br>
+                    <span class="text-sm text-[#aaa]">${e.date} • ${e.servings} servings • ${e.effects}</span>
+                </div>
+            `).join('');
+        }
+
+        function calculateYield() {
+            const grams = parseFloat(document.getElementById('grow-yield').value) || 100;
+            const thcPercent = parseFloat(document.getElementById('grow-thc').value) || 18;
+            
+            const totalTHC = grams * (thcPercent / 100) * 1000;
+            const batches10 = Math.floor(totalTHC / 10);
+            const batches20 = Math.floor(totalTHC / 20);
+            
+            document.getElementById('grow-result').innerHTML = `
+                <p><strong>Estimated Total THC:</strong> ${totalTHC.toFixed(0)} mg</p>
+                <p class="mt-3"><strong>You could make approximately:</strong><br>
+                • ${batches10} servings at 10mg each<br>
+                • ${batches20} servings at 20mg each</p>
+            `;
+            document.getElementById('grow-result').classList.remove('hidden');
+        }
+
+        function showEducation(topic) {
+            const content = document.getElementById('education-content');
+            content.classList.remove('hidden');
+            
+            if (topic === 'decarb') {
+                content.innerHTML = `<strong>Decarboxylation</strong><br><br>Heating cannabis at 240°F (115°C) for 30-40 minutes converts THCA into THC. This is essential for edibles to be psychoactive.`;
+            } else if (topic === 'infusion') {
+                content.innerHTML = `<strong>Infusion Methods</strong><br><br>Common methods include butter, coconut oil, and MCT oil. Longer, lower-temperature infusions usually produce better results.`;
+            } else {
+                content.innerHTML = `<strong>Understanding Tolerance</strong><br><br>Regular use of cannabis can reduce its effects over time. Taking tolerance breaks helps reset your sensitivity.`;
+            }
+        }
+
+        function initApp() {
+            loadJournalEntries();
+            document.getElementById('recipe').classList.add('active');
+            document.getElementById('nav-recipe').classList.add('active');
+        }
+
+        window.onload = initApp;
+    </script>
+</body>
+</html>
