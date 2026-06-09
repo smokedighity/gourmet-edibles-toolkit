@@ -81,30 +81,15 @@
                 <div id="recipe" class="tool-section active">
                     <div class="gourmet-card p-8 rounded-3xl max-w-3xl">
                         <h2 class="text-3xl font-semibold mb-2">AI Recipe Generator</h2>
-                        <p class="text-[#aaa] mb-6">Get original recipes made for your preferences.</p>
+                        <p class="text-[#aaa] mb-6">Describe what you want and get a full recipe.</p>
                         
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <label class="block text-sm mb-1.5">Recipe Style</label>
-                                <select id="recipe-style" class="w-full bg-[#111] border border-[#444] rounded-xl px-4 py-3">
-                                    <option value="sweet">Sweet / Dessert</option>
-                                    <option value="savory">Savory</option>
-                                    <option value="gummy">Gummies</option>
-                                    <option value="drink">Beverage</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-sm mb-1.5">Desired Effects</label>
-                                <select id="recipe-effects" class="w-full bg-[#111] border border-[#444] rounded-xl px-4 py-3">
-                                    <option value="relax">Relaxation</option>
-                                    <option value="focus">Focus / Creativity</option>
-                                    <option value="euphoria">Euphoria</option>
-                                    <option value="pain">Pain Relief</option>
-                                </select>
-                            </div>
+                        <div class="mb-6">
+                            <label class="block text-sm mb-1.5">Describe your recipe idea</label>
+                            <textarea id="recipe-prompt" rows="3" placeholder="Example: A relaxing chocolate dessert using earthy strains, around 10mg per serving" 
+                                      class="w-full bg-[#111] border border-[#444] rounded-xl px-4 py-3"></textarea>
                         </div>
                         
-                        <button onclick="generateRecipe()" class="mt-6 w-full bg-[#d4af37] text-[#111] py-4 rounded-2xl font-semibold">GENERATE RECIPE</button>
+                        <button onclick="generateFullRecipe()" class="w-full bg-[#d4af37] text-[#111] py-4 rounded-2xl font-semibold">GENERATE FULL RECIPE</button>
                         
                         <div id="recipe-result" class="mt-6 hidden result-box p-6 rounded-2xl"></div>
                     </div>
@@ -255,35 +240,90 @@
             document.getElementById('nav-' + section).classList.add('active');
         }
 
-        function generateRecipe() {
-            const style = document.getElementById('recipe-style').value;
-            const effect = document.getElementById('recipe-effects').value;
+        function generateFullRecipe() {
+            const prompt = document.getElementById('recipe-prompt').value.toLowerCase();
+            const resultBox = document.getElementById('recipe-result');
             
-            let title = "";
-            let description = "";
+            let title = "Custom Infused Recipe";
+            let ingredients = [];
+            let instructions = [];
+            let terpeneNote = "Myrcene for relaxation";
+            let dosing = "Start with 5-10mg THC per serving.";
 
-            if (style === "sweet" && effect === "relax") {
-                title = "Granddaddy Purple Chocolate Truffles";
-                description = "Rich dark chocolate truffles with deep body relaxation. Earthy and slightly sweet.";
-            } else if (style === "savory" && effect === "focus") {
-                title = "Sour Diesel Infused Mushroom Pasta";
-                description = "Savory mushroom pasta with uplifting and focused effects.";
-            } else if (style === "gummy" && effect === "euphoria") {
-                title = "Blue Dream Citrus Gummies";
-                description = "Bright, euphoric gummies with balanced hybrid effects.";
-            } else {
-                title = `${style.charAt(0).toUpperCase() + style.slice(1)} Infused Recipe`;
-                description = `A balanced ${style} recipe designed for ${effect} effects.`;
+            if (prompt.includes("chocolate") || prompt.includes("dessert")) {
+                title = "Dark Chocolate Relaxation Truffles";
+                ingredients = [
+                    "200g dark chocolate",
+                    "100ml cannabis-infused coconut oil",
+                    "2 tbsp cocoa powder",
+                    "1 tsp vanilla extract",
+                    "Pinch of sea salt"
+                ];
+                instructions = [
+                    "Melt the dark chocolate and infused coconut oil together over low heat.",
+                    "Stir in cocoa powder, vanilla, and salt until smooth.",
+                    "Pour into silicone molds or a lined tray.",
+                    "Refrigerate for 2 hours until set.",
+                    "Dust with cocoa powder before serving."
+                ];
+                terpeneNote = "Myrcene + Linalool for deep relaxation.";
+            } 
+            else if (prompt.includes("gummy") || prompt.includes("candy")) {
+                title = "Citrus Uplifting Gummies";
+                ingredients = [
+                    "1 cup fruit juice (orange or lemon)",
+                    "2 tbsp cannabis-infused honey or tincture",
+                    "2 tbsp gelatin powder",
+                    "2 tbsp sugar"
+                ];
+                instructions = [
+                    "Heat juice and sugar in a saucepan.",
+                    "Sprinkle in gelatin and whisk until dissolved.",
+                    "Remove from heat and stir in infused honey/tincture.",
+                    "Pour into silicone gummy molds.",
+                    "Refrigerate for 1-2 hours until firm."
+                ];
+                terpeneNote = "Limonene for uplifting effects.";
+            } 
+            else {
+                title = "Savory Herb-Infused Dish";
+                ingredients = [
+                    "2 tbsp cannabis-infused olive oil",
+                    "500g mushrooms or vegetables",
+                    "3 cloves garlic",
+                    "Fresh herbs (rosemary/thyme)",
+                    "Salt & pepper to taste"
+                ];
+                instructions = [
+                    "Saut\u00e9 garlic in infused olive oil.",
+                    "Add mushrooms/vegetables and cook until tender.",
+                    "Season with herbs, salt, and pepper.",
+                    "Serve warm."
+                ];
+                terpeneNote = "Caryophyllene + Myrcene for grounding effects.";
             }
 
-            const resultHTML = `
-                <h3 class="font-semibold text-xl mb-2">${title}</h3>
-                <p class="text-[#aaa]">${description}</p>
-                <p class="mt-4 text-sm">Use complementary terpenes and start with a low dose (5-10mg THC per serving).</p>
+            let html = `
+                <h3 class="text-2xl font-semibold mb-4">${title}</h3>
+                
+                <h4 class="font-semibold mt-4 mb-2">Ingredients:</h4>
+                <ul class="list-disc pl-5 mb-4">
+                    ${ingredients.map(item => `<li>${item}</li>`).join('')}
+                </ul>
+                
+                <h4 class="font-semibold mb-2">Instructions:</h4>
+                <ol class="list-decimal pl-5 mb-4">
+                    ${instructions.map(step => `<li>${step}</li>`).join('')}
+                </ol>
+                
+                <div class="mt-4 p-4 bg-[#1f1f1f] rounded-xl">
+                    <p><strong>Terpene Pairing:</strong> ${terpeneNote}</p>
+                    <p class="mt-1"><strong>Dosing:</strong> ${dosing}</p>
+                </div>
             `;
-            
-            document.getElementById('recipe-result').innerHTML = resultHTML;
-            document.getElementById('recipe-result').classList.remove('hidden');
+
+            resultBox.innerHTML = html;
+            resultBox.classList.remove('hidden');
         }
 
         function getTerpenePairing() {
@@ -383,7 +423,7 @@
             content.classList.remove('hidden');
             
             if (topic === 'decarb') {
-                content.innerHTML = `<strong>Decarboxylation</strong><br><br>Heating cannabis at 240°F (115°C) for 30-40 minutes converts THCA into THC. This is essential for edibles to be psychoactive.`;
+                content.innerHTML = `<strong>Decarboxylation</strong><br><br>Heating cannabis at 240\u00b0F (115\u00b0C) for 30-40 minutes converts THCA into THC. This is essential for edibles to be psychoactive.`;
             } else if (topic === 'infusion') {
                 content.innerHTML = `<strong>Infusion Methods</strong><br><br>Common methods include butter, coconut oil, and MCT oil. Longer, lower-temperature infusions usually produce better results.`;
             } else {
