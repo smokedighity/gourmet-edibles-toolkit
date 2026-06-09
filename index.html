@@ -81,15 +81,96 @@
                 <div id="recipe" class="tool-section active">
                     <div class="gourmet-card p-8 rounded-3xl max-w-3xl">
                         <h2 class="text-3xl font-semibold mb-2">AI Recipe Generator</h2>
-                        <p class="text-[#aaa] mb-6">Describe what you want and get a full recipe.</p>
+                        <p class="text-[#aaa] mb-6">Select your preferences and get a full recipe.</p>
                         
-                        <div class="mb-6">
-                            <label class="block text-sm mb-1.5">Describe your recipe idea</label>
-                            <textarea id="recipe-prompt" rows="3" placeholder="Example: A relaxing chocolate dessert using earthy strains, around 10mg per serving" 
-                                      class="w-full bg-[#111] border border-[#444] rounded-xl px-4 py-3"></textarea>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                            <!-- Dose -->
+                            <div>
+                                <label class="block text-sm mb-1.5">Dose</label>
+                                <select id="dose" class="w-full bg-[#111] border border-[#444] rounded-xl px-4 py-3">
+                                    <option value="micro">Microdose (2–5mg)</option>
+                                    <option value="low">Low (5–10mg)</option>
+                                    <option value="moderate-low">Moderate Low (10–15mg)</option>
+                                    <option value="medium">Medium (15–25mg)</option>
+                                    <option value="moderate-high">Moderate High (25–40mg)</option>
+                                    <option value="high">High (40–60mg)</option>
+                                    <option value="very-high">Very High (60–100mg)</option>
+                                    <option value="strong">Strong (100–150mg)</option>
+                                    <option value="heavy">Heavy (150–200mg)</option>
+                                    <option value="macro">Macro (200mg+)</option>
+                                </select>
+                            </div>
+
+                            <!-- Strain -->
+                            <div>
+                                <label class="block text-sm mb-1.5">Strain Type</label>
+                                <select id="strain-type" class="w-full bg-[#111] border border-[#444] rounded-xl px-4 py-3">
+                                    <option value="relaxing-indica">Relaxing Indica</option>
+                                    <option value="uplifting-sativa">Uplifting Sativa</option>
+                                    <option value="balanced-hybrid">Balanced Hybrid</option>
+                                    <option value="strong-body">Strong Body High</option>
+                                    <option value="clear-headed">Clear-Headed Hybrid</option>
+                                    <option value="sedating">Sedating / Sleepy</option>
+                                    <option value="creative">Creative / Energetic</option>
+                                    <option value="pain-relief">Pain Relief Focused</option>
+                                    <option value="mood">Mood Enhancing</option>
+                                    <option value="functional">Functional / Daytime</option>
+                                </select>
+                            </div>
+
+                            <!-- THC % -->
+                            <div>
+                                <label class="block text-sm mb-1.5">THC %</label>
+                                <select id="thc-percent" class="w-full bg-[#111] border border-[#444] rounded-xl px-4 py-3">
+                                    <option value="8-12">8–12%</option>
+                                    <option value="12-15">12–15%</option>
+                                    <option value="15-17">15–17%</option>
+                                    <option value="17-19">17–19%</option>
+                                    <option value="19-21">19–21%</option>
+                                    <option value="21-23">21–23%</option>
+                                    <option value="23-25">23–25%</option>
+                                    <option value="25-28">25–28%</option>
+                                    <option value="28-30">28–30%</option>
+                                    <option value="30+">30%+</option>
+                                </select>
+                            </div>
+
+                            <!-- Recipe Style -->
+                            <div>
+                                <label class="block text-sm mb-1.5">Recipe Style</label>
+                                <select id="recipe-style" class="w-full bg-[#111] border border-[#444] rounded-xl px-4 py-3">
+                                    <option value="chocolate">Chocolate Dessert</option>
+                                    <option value="gummy">Gummies / Candy</option>
+                                    <option value="cookie">Cookies / Blondies</option>
+                                    <option value="brownie">Brownies / Baked Goods</option>
+                                    <option value="savory">Savory Dish</option>
+                                    <option value="drink">Drink / Beverage</option>
+                                    <option value="ice-cream">Ice Cream / Frozen</option>
+                                    <option value="snack">Snack / Trail Mix</option>
+                                    <option value="tea">Tea / Tincture</option>
+                                    <option value="no-bake">No-Bake Treats</option>
+                                </select>
+                            </div>
+
+                            <!-- Desired Effect -->
+                            <div class="md:col-span-2">
+                                <label class="block text-sm mb-1.5">Desired Effect</label>
+                                <select id="desired-effect" class="w-full bg-[#111] border border-[#444] rounded-xl px-4 py-3">
+                                    <option value="deep-relaxation">Deep Relaxation</option>
+                                    <option value="uplifting">Uplifting / Happy</option>
+                                    <option value="focused">Focused / Creative</option>
+                                    <option value="strong-body">Strong Body High</option>
+                                    <option value="pain-relief">Pain Relief</option>
+                                    <option value="sleep">Sleep / Sedation</option>
+                                    <option value="mood-boost">Mood Boost</option>
+                                    <option value="clear-headed">Clear Headed</option>
+                                    <option value="social">Social / Energetic</option>
+                                    <option value="gentle">Gentle / Functional</option>
+                                </select>
+                            </div>
                         </div>
                         
-                        <button onclick="generateFullRecipe()" class="w-full bg-[#d4af37] text-[#111] py-4 rounded-2xl font-semibold">GENERATE FULL RECIPE</button>
+                        <button onclick="generateAdvancedRecipe()" class="w-full bg-[#d4af37] text-[#111] py-4 rounded-2xl font-semibold">GENERATE FULL RECIPE</button>
                         
                         <div id="recipe-result" class="mt-6 hidden result-box p-6 rounded-2xl"></div>
                     </div>
@@ -146,7 +227,7 @@
                             </div>
                             <div>
                                 <label class="block text-sm mb-1.5">Desired Effect</label>
-                                <select id="desired-effect" class="w-full bg-[#111] border border-[#444] rounded-xl px-4 py-3">
+                                <select id="desired-effect2" class="w-full bg-[#111] border border-[#444] rounded-xl px-4 py-3">
                                     <option value="relax">Relax</option>
                                     <option value="uplifting">Uplifting</option>
                                     <option value="focused">Focused</option>
@@ -241,84 +322,56 @@
             document.getElementById('nav-' + section).classList.add('active');
         }
 
-        function generateFullRecipe() {
-            const prompt = document.getElementById('recipe-prompt').value.toLowerCase();
+        function generateAdvancedRecipe() {
+            const dose = document.getElementById('dose').value;
+            const strainType = document.getElementById('strain-type').value;
+            const thcPercent = document.getElementById('thc-percent').value;
+            const recipeStyle = document.getElementById('recipe-style').value;
+            const desiredEffect = document.getElementById('desired-effect').value;
+            
             const resultBox = document.getElementById('recipe-result');
             
-            // Default values
+            // Generate recipe based on selections
             let title = "Custom Infused Recipe";
-            let opening = "A well-balanced recipe tailored to your request.";
-            let whyItWorks = "This recipe is designed for great flavor and effective cannabinoid delivery.";
+            let opening = "A recipe tailored to your selected preferences.";
+            let whyItWorks = "This recipe is designed for good flavor and effective dosing.";
             let ingredients = [];
             let instructions = [];
-            let decarb = "Preheat oven to 240\u00b0F (115\u00b0C). Break up your cannabis into small pieces and spread evenly on parchment paper. Bake for 30-40 minutes, stirring once halfway through. Allow to cool completely before using.";
-            let infusion = "Use the decarboxylated cannabis to infuse into butter, oil, or another fat base. Heat gently for 2-3 hours, then strain.";
-            let terpene = "Myrcene and Caryophyllene for relaxing, grounding effects.";
-            let strain = "Blue Dream or Granddaddy Purple - balanced options with good flavor profiles.";
-            let dosage = "Start low with 5-10mg THC per serving. Wait at least 2 hours before consuming more.";
+            let decarb = "Preheat oven to 240\u00b0F (115\u00b0C). Break up cannabis and spread on parchment. Bake 30-40 minutes, stirring once. Cool completely.";
+            let infusion = "Infuse decarboxylated cannabis into butter or oil on low heat for 2-3 hours, then strain.";
+            let terpene = "Balanced terpene profile based on your selections.";
+            let strain = "Recommended strain based on your choices.";
+            let dosageNote = "Follow your selected dose level. Start low and go slow.";
 
-            // Advanced keyword detection
-            const isChocolate = prompt.includes("chocolate") || prompt.includes("truffle") || prompt.includes("brownie");
-            const isGummy = prompt.includes("gummy") || prompt.includes("gummies") || prompt.includes("candy");
-            const isSavory = prompt.includes("savory") || prompt.includes("mushroom") || prompt.includes("pasta") || prompt.includes("dish");
-            const isDrink = prompt.includes("drink") || prompt.includes("beverage") || prompt.includes("lemonade");
-            const isRelax = prompt.includes("relax") || prompt.includes("calm") || prompt.includes("sleep");
-            const isUplifting = prompt.includes("uplift") || prompt.includes("energy") || prompt.includes("focus");
-
-            // Recipe Generation Logic
-            if (isChocolate && isRelax) {
-                title = "Dark Chocolate Myrcene Truffles";
-                opening = "Deeply relaxing dark chocolate truffles with rich, earthy notes designed for evening use.";
-                whyItWorks = "Dark chocolate pairs beautifully with earthy cannabis while the fat content aids cannabinoid absorption for stronger effects.";
-                ingredients = ["8 oz dark chocolate (70%+", "1/4 cup cannabis-infused coconut oil", "2 tbsp unsweetened cocoa powder", "1 tsp vanilla extract", "Pinch of sea salt", "Optional: crushed nuts for coating"];
-                instructions = ["Melt the dark chocolate and infused coconut oil together using a double boiler or microwave in short bursts.", "Stir in the cocoa powder, vanilla extract, and sea salt until completely smooth.", "Remove from heat and let the mixture cool for 5 minutes.", "Scoop or pipe the mixture into small truffle shapes or silicone molds.", "Refrigerate for 2 hours until fully set.", "Optional: Roll in crushed nuts or extra cocoa powder before serving."];
-                terpene = "Myrcene and Linalool for deep physical relaxation and calm.";
-                strain = "Granddaddy Purple - strong relaxing indica with sweet, grape-like notes.";
-                dosage = "Each truffle contains approximately 8-12mg THC. Start with half a truffle and wait 2 hours.";
-            } 
-            else if (isGummy && isUplifting) {
-                title = "Citrus Limonene Uplifting Gummies";
-                opening = "Bright, zesty gummies that deliver clear-headed and mood-lifting effects.";
-                whyItWorks = "Citrus flavors enhance the uplifting terpenes while the gelatin creates a clean, enjoyable texture.";
-                ingredients = ["1 cup fresh orange or lemon juice", "3 tbsp cannabis-infused honey or tincture", "2 tbsp unflavored gelatin powder", "2-3 tbsp organic cane sugar", "Optional: natural food coloring"];
-                instructions = ["Combine the fruit juice and sugar in a small saucepan over medium heat.", "Sprinkle the gelatin powder over the liquid and whisk continuously until fully dissolved.", "Remove from heat and stir in the infused honey or tincture.", "Carefully pour the mixture into silicone gummy molds.", "Refrigerate for 1.5 to 2 hours until completely firm.", "Pop the gummies out of the molds and store in an airtight container in the fridge."];
-                terpene = "Limonene for mood elevation, focus, and mental clarity.";
-                strain = "Sour Diesel or Jack Herer - uplifting sativas with bright, citrus profiles.";
-                dosage = "Each gummy contains approximately 5-8mg THC. Start with one gummy and wait 90 minutes.";
-            } 
-            else if (isSavory) {
-                title = "Garlic Herb Infused Mushroom Saut\u00e9";
-                opening = "A savory, comforting mushroom dish with grounding and relaxing effects.";
-                whyItWorks = "Mushrooms and herbs naturally complement earthy cannabis strains, while the olive oil helps with cannabinoid absorption.";
-                ingredients = ["2 tbsp cannabis-infused olive oil", "1 lb mixed mushrooms (cremini, shiitake, oyster)", "4 cloves garlic, thinly sliced", "2 tsp fresh rosemary and thyme", "Salt and freshly ground black pepper", "Optional: splash of white wine or broth"];
-                instructions = ["Heat the infused olive oil in a large skillet over medium heat.", "Add the sliced garlic and saut\u00e9 for about 1 minute until fragrant but not browned.", "Add the mushrooms and cook for 8-10 minutes, stirring occasionally, until golden and tender.", "Stir in the fresh herbs, salt, and pepper. Cook for another 2 minutes.", "Optional: Add a splash of white wine or broth and let it reduce for extra flavor.", "Remove from heat and serve warm as a side or over grains."];
-                terpene = "Myrcene and Caryophyllene for grounding and body relaxation.";
-                strain = "OG Kush or Granddaddy Purple - relaxing indicas with earthy, herbal notes.";
-                dosage = "This recipe serves 3-4 people. Each serving contains approximately 8-12mg THC.";
-            } 
-            else if (isDrink) {
-                title = "Uplifting Cannabis Lemonade";
-                opening = "A refreshing, lightly sweet cannabis-infused lemonade with clear and uplifting effects.";
-                whyItWorks = "Lemon and cannabis pair exceptionally well, and the liquid format allows for easy, controlled dosing.";
-                ingredients = ["4-5 fresh lemons (about 1 cup juice)", "4 cups cold water", "1/3 cup cannabis-infused simple syrup or honey", "Ice", "Fresh mint or lemon slices for garnish"];
-                instructions = ["Juice the lemons and combine the juice with cold water in a pitcher.", "Stir in the infused simple syrup or honey until fully dissolved.", "Taste and adjust sweetness if needed.", "Add ice and stir well.", "Garnish with fresh mint or lemon slices.", "Serve immediately or store in the fridge for up to 2 days."];
-                terpene = "Limonene and Pinene for uplifting and clear-headed effects.";
-                strain = "Jack Herer or Blue Dream - balanced hybrids with bright, energetic profiles.";
-                dosage = "Each 8 oz serving contains approximately 5-10mg THC depending on how much infused syrup you use. Start slow.";
-            } 
-            else {
-                // Default balanced recipe
-                title = "Balanced Hybrid Infused Cookies";
-                opening = "Classic, approachable cookies with balanced effects suitable for most occasions.";
-                whyItWorks = "Butter-based cookies are easy to dose and the familiar flavor helps mask cannabis taste.";
-                ingredients = ["1/2 cup cannabis-infused butter (softened)", "3/4 cup brown sugar", "1 large egg", "1 tsp vanilla extract", "1 1/4 cups all-purpose flour", "1/2 tsp baking soda", "1/4 tsp salt", "Optional: chocolate chips or nuts"];
-                instructions = ["Preheat oven to 350\u00b0F (175\u00b0C) and line a baking sheet with parchment.", "Cream together the infused butter and brown sugar until light and fluffy.", "Beat in the egg and vanilla extract.", "In a separate bowl, whisk together flour, baking soda, and salt.", "Gradually mix the dry ingredients into the wet mixture.", "Scoop dough onto the baking sheet and bake for 10-12 minutes until edges are golden.", "Let cool on the tray for 5 minutes before transferring to a wire rack."]
-                terpene = "Balanced hybrid terpene profile (Myrcene + Limonene).";
-                strain = "Blue Dream - versatile hybrid with balanced effects.";
-                dosage = "Each cookie contains approximately 8-12mg THC. Start with half a cookie.";
+            // Basic logic based on selections
+            if (recipeStyle === "chocolate" && desiredEffect === "deep-relaxation") {
+                title = "Deep Relaxation Dark Chocolate Truffles";
+                opening = "Rich dark chocolate truffles designed for strong relaxation.";
+                ingredients = ["8 oz dark chocolate", "1/4 cup cannabis-infused coconut oil", "2 tbsp cocoa powder", "1 tsp vanilla", "Pinch of salt"];
+                instructions = ["Melt chocolate and infused oil together.", "Stir in cocoa, vanilla, and salt.", "Cool slightly and form into truffles.", "Refrigerate 2 hours until set."];
+                terpene = "Myrcene + Linalool for deep relaxation.";
+                strain = "Granddaddy Purple or similar relaxing indica.";
+            } else if (recipeStyle === "gummy" && desiredEffect === "uplifting") {
+                title = "Uplifting Citrus Gummies";
+                opening = "Bright citrus gummies for mood and energy.";
+                ingredients = ["1 cup orange juice", "3 tbsp infused honey", "2 tbsp gelatin", "2 tbsp sugar"];
+                instructions = ["Heat juice and sugar.", "Add gelatin and dissolve.", "Stir in infused honey.", "Pour into molds and refrigerate."];
+                terpene = "Limonene for uplifting effects.";
+                strain = "Sour Diesel or Jack Herer.";
+            } else {
+                title = "Custom " + recipeStyle.charAt(0).toUpperCase() + recipeStyle.slice(1) + " Recipe";
+                opening = "A " + desiredEffect.replace('-', ' ') + " focused " + recipeStyle + " recipe.";
+                ingredients = ["Main ingredients based on style", "Cannabis-infused fat or tincture", "Flavorings and seasonings"];
+                instructions = ["Prepare base ingredients.", "Add infused element.", "Cook or assemble as needed.", "Cool and portion appropriately."];
+                terpene = "Selected based on desired effect.";
+                strain = strainType.replace('-', ' ');
             }
 
-            // Build final HTML output
+            // Adjust dosage note based on selection
+            if (dose === "micro") dosageNote = "Microdose range (2-5mg THC). Very subtle effects.";
+            else if (dose === "macro") dosageNote = "Macro dose (200mg+). Use with extreme caution and experience.";
+            else dosageNote = "Follow your selected dose level carefully.";
+
             let html = `
                 <h3 class="text-2xl font-semibold mb-4">${title}</h3>
                 <p class="mb-6 text-[#aaa]">${opening}</p>
@@ -349,7 +402,9 @@
                 <p class="mb-4">${strain}</p>
 
                 <h4 class="font-semibold mb-2">Dosage</h4>
-                <p>${dosage}</p>
+                <p>${dosageNote}</p>
+
+                <p class="mt-4 text-sm text-[#888]">THC % Range: ${thcPercent} | Strain Type: ${strainType.replace('-', ' ')} | Dose Level: ${dose}</p>
             `;
 
             resultBox.innerHTML = html;
@@ -376,7 +431,7 @@
 
         function recommendStrain() {
             const dish = document.getElementById('dish-type').value;
-            const effect = document.getElementById('desired-effect').value;
+            const effect = document.getElementById('desired-effect2').value;
             
             let result = `<h3 class="font-semibold mb-3">Recommended Strains</h3>`;
             
@@ -538,7 +593,7 @@
 
         function recommendStrain() {
             const dish = document.getElementById('dish-type').value;
-            const effect = document.getElementById('desired-effect').value;
+            const effect = document.getElementById('desired-effect2').value;
             
             let result = `<h3 class="font-semibold mb-3">Recommended Strains</h3>`;
             
