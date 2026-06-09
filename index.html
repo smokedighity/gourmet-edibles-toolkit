@@ -30,7 +30,6 @@
                     <p class="text-xs text-[#d4af37] -mt-1">CHEF SMOKE • CHICAGO</p>
                 </div>
             </div>
-            <div class="text-sm text-[#888]">Reader Tools</div>
         </div>
     </header>
 
@@ -40,21 +39,16 @@
             <!-- Vertical Navigation -->
             <div class="lg:w-72 flex-shrink-0">
                 <div class="sticky top-6">
-                    <h3 class="text-sm font-semibold text-[#888] mb-3 px-3">READER TOOLS</h3>
+                    <h3 class="text-sm font-semibold text-[#888] mb-3 px-3">TOOLS</h3>
                     
-                    <div onclick="showSection('recipe')" class="nav-item flex items-center gap-x-3 px-4 py-3 rounded-2xl mb-1 cursor-pointer hover:bg-[#1f1f1f] active" id="nav-recipe">
-                        <i class="fa-solid fa-magic w-5 text-emerald-400"></i>
-                        <span>AI Recipe Generator</span>
+                    <div onclick="showSection('strain')" class="nav-item flex items-center gap-x-3 px-4 py-3 rounded-2xl mb-1 cursor-pointer hover:bg-[#1f1f1f] active" id="nav-strain">
+                        <i class="fa-solid fa-seedling w-5 text-emerald-400"></i>
+                        <span>Strain Recommender</span>
                     </div>
                     
                     <div onclick="showSection('terpene')" class="nav-item flex items-center gap-x-3 px-4 py-3 rounded-2xl mb-1 cursor-pointer hover:bg-[#1f1f1f]" id="nav-terpene">
                         <i class="fa-solid fa-leaf w-5 text-emerald-400"></i>
                         <span>Terpene Pairing Tool</span>
-                    </div>
-                    
-                    <div onclick="showSection('strain')" class="nav-item flex items-center gap-x-3 px-4 py-3 rounded-2xl mb-1 cursor-pointer hover:bg-[#1f1f1f]" id="nav-strain">
-                        <i class="fa-solid fa-seedling w-5 text-emerald-400"></i>
-                        <span>Strain Recommender</span>
                     </div>
                     
                     <div onclick="showSection('journal')" class="nav-item flex items-center gap-x-3 px-4 py-3 rounded-2xl mb-1 cursor-pointer hover:bg-[#1f1f1f]" id="nav-journal">
@@ -77,102 +71,36 @@
             <!-- Main Content -->
             <div class="flex-1 min-w-0">
                 
-                <!-- AI Recipe Generator -->
-                <div id="recipe" class="tool-section active">
+                <!-- Strain Recommender (4 Top Strains) -->
+                <div id="strain" class="tool-section active">
                     <div class="gourmet-card p-8 rounded-3xl max-w-3xl">
-                        <h2 class="text-3xl font-semibold mb-2">AI Recipe Generator</h2>
-                        <p class="text-[#aaa] mb-6">Select your preferences and get a full recipe.</p>
+                        <h2 class="text-3xl font-semibold mb-2">Strain Recommender</h2>
+                        <p class="text-[#aaa] mb-6">Get top strain recommendations.</p>
                         
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                            <!-- Dose -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <label class="block text-sm mb-1.5">Dose</label>
-                                <select id="dose" class="w-full bg-[#111] border border-[#444] rounded-xl px-4 py-3">
-                                    <option value="micro">Microdose (2–5mg)</option>
-                                    <option value="low">Low (5–10mg)</option>
-                                    <option value="moderate-low">Moderate Low (10–15mg)</option>
-                                    <option value="medium">Medium (15–25mg)</option>
-                                    <option value="moderate-high">Moderate High (25–40mg)</option>
-                                    <option value="high">High (40–60mg)</option>
-                                    <option value="very-high">Very High (60–100mg)</option>
-                                    <option value="strong">Strong (100–150mg)</option>
-                                    <option value="heavy">Heavy (150–200mg)</option>
-                                    <option value="macro">Macro (200mg+)</option>
+                                <label class="block text-sm mb-1.5">Type of Dish</label>
+                                <select id="dish-type" class="w-full bg-[#111] border border-[#444] rounded-xl px-4 py-3">
+                                    <option value="dessert">Dessert</option>
+                                    <option value="savory">Savory Meal</option>
+                                    <option value="gummy">Gummies</option>
+                                    <option value="drink">Drink</option>
                                 </select>
                             </div>
-
-                            <!-- Strain -->
                             <div>
-                                <label class="block text-sm mb-1.5">Strain Type</label>
-                                <select id="strain-type" class="w-full bg-[#111] border border-[#444] rounded-xl px-4 py-3">
-                                    <option value="relaxing-indica">Relaxing Indica</option>
-                                    <option value="uplifting-sativa">Uplifting Sativa</option>
-                                    <option value="balanced-hybrid">Balanced Hybrid</option>
-                                    <option value="strong-body">Strong Body High</option>
-                                    <option value="clear-headed">Clear-Headed Hybrid</option>
-                                    <option value="sedating">Sedating / Sleepy</option>
-                                    <option value="creative">Creative / Energetic</option>
-                                    <option value="pain-relief">Pain Relief Focused</option>
-                                    <option value="mood">Mood Enhancing</option>
-                                    <option value="functional">Functional / Daytime</option>
-                                </select>
-                            </div>
-
-                            <!-- THC % -->
-                            <div>
-                                <label class="block text-sm mb-1.5">THC %</label>
-                                <select id="thc-percent" class="w-full bg-[#111] border border-[#444] rounded-xl px-4 py-3">
-                                    <option value="8-12">8–12%</option>
-                                    <option value="12-15">12–15%</option>
-                                    <option value="15-17">15–17%</option>
-                                    <option value="17-19">17–19%</option>
-                                    <option value="19-21">19–21%</option>
-                                    <option value="21-23">21–23%</option>
-                                    <option value="23-25">23–25%</option>
-                                    <option value="25-28">25–28%</option>
-                                    <option value="28-30">28–30%</option>
-                                    <option value="30+">30%+</option>
-                                </select>
-                            </div>
-
-                            <!-- Recipe Style -->
-                            <div>
-                                <label class="block text-sm mb-1.5">Recipe Style</label>
-                                <select id="recipe-style" class="w-full bg-[#111] border border-[#444] rounded-xl px-4 py-3">
-                                    <option value="chocolate">Chocolate Dessert</option>
-                                    <option value="gummy">Gummies / Candy</option>
-                                    <option value="cookie">Cookies / Blondies</option>
-                                    <option value="brownie">Brownies / Baked Goods</option>
-                                    <option value="savory">Savory Dish</option>
-                                    <option value="drink">Drink / Beverage</option>
-                                    <option value="ice-cream">Ice Cream / Frozen</option>
-                                    <option value="snack">Snack / Trail Mix</option>
-                                    <option value="tea">Tea / Tincture</option>
-                                    <option value="no-bake">No-Bake Treats</option>
-                                </select>
-                            </div>
-
-                            <!-- Desired Effect -->
-                            <div class="md:col-span-2">
                                 <label class="block text-sm mb-1.5">Desired Effect</label>
-                                <select id="desired-effect" class="w-full bg-[#111] border border-[#444] rounded-xl px-4 py-3">
-                                    <option value="deep-relaxation">Deep Relaxation</option>
-                                    <option value="uplifting">Uplifting / Happy</option>
-                                    <option value="focused">Focused / Creative</option>
-                                    <option value="strong-body">Strong Body High</option>
-                                    <option value="pain-relief">Pain Relief</option>
-                                    <option value="sleep">Sleep / Sedation</option>
-                                    <option value="mood-boost">Mood Boost</option>
-                                    <option value="clear-headed">Clear Headed</option>
-                                    <option value="social">Social / Energetic</option>
-                                    <option value="gentle">Gentle / Functional</option>
+                                <select id="desired-effect2" class="w-full bg-[#111] border border-[#444] rounded-xl px-4 py-3">
+                                    <option value="relax">Relax</option>
+                                    <option value="uplifting">Uplifting</option>
+                                    <option value="focused">Focused</option>
+                                    <option value="body">Strong Body High</option>
                                 </select>
                             </div>
                         </div>
                         
-                        <button onclick="generateAdvancedRecipe()" class="w-full bg-[#d4af37] text-[#111] py-4 rounded-2xl font-semibold">GENERATE FULL RECIPE</button>
+                        <button onclick="recommendStrain()" class="mt-6 w-full bg-emerald-600 py-4 rounded-2xl font-semibold">GET TOP 4 STRAINS</button>
                         
-                        <div id="recipe-result" class="mt-6 hidden result-box p-6 rounded-2xl"></div>
+                        <div id="strain-result" class="mt-6 hidden result-box p-6 rounded-2xl"></div>
                     </div>
                 </div>
 
@@ -206,39 +134,6 @@
                         <button onclick="getTerpenePairing()" class="mt-6 w-full bg-emerald-600 py-4 rounded-2xl font-semibold">FIND PAIRINGS</button>
                         
                         <div id="terpene-result" class="mt-6 hidden result-box p-6 rounded-2xl"></div>
-                    </div>
-                </div>
-
-                <!-- Strain Recommender -->
-                <div id="strain" class="tool-section">
-                    <div class="gourmet-card p-8 rounded-3xl max-w-3xl">
-                        <h2 class="text-3xl font-semibold mb-2">Strain Recommender</h2>
-                        <p class="text-[#aaa] mb-6">Get popular strain recommendations.</p>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <label class="block text-sm mb-1.5">Type of Dish</label>
-                                <select id="dish-type" class="w-full bg-[#111] border border-[#444] rounded-xl px-4 py-3">
-                                    <option value="dessert">Dessert</option>
-                                    <option value="savory">Savory Meal</option>
-                                    <option value="gummy">Gummies</option>
-                                    <option value="drink">Drink</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-sm mb-1.5">Desired Effect</label>
-                                <select id="desired-effect2" class="w-full bg-[#111] border border-[#444] rounded-xl px-4 py-3">
-                                    <option value="relax">Relax</option>
-                                    <option value="uplifting">Uplifting</option>
-                                    <option value="focused">Focused</option>
-                                    <option value="body">Strong Body High</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <button onclick="recommendStrain()" class="mt-6 w-full bg-emerald-600 py-4 rounded-2xl font-semibold">SHOW 20 POPULAR STRAINS</button>
-                        
-                        <div id="strain-result" class="mt-6 hidden result-box p-6 rounded-2xl"></div>
                     </div>
                 </div>
 
@@ -322,92 +217,6 @@
             document.getElementById('nav-' + section).classList.add('active');
         }
 
-        function generateAdvancedRecipe() {
-            const dose = document.getElementById('dose').value;
-            const strainType = document.getElementById('strain-type').value;
-            const thcPercent = document.getElementById('thc-percent').value;
-            const recipeStyle = document.getElementById('recipe-style').value;
-            const desiredEffect = document.getElementById('desired-effect').value;
-            
-            const resultBox = document.getElementById('recipe-result');
-            
-            let title = "Custom Infused Recipe";
-            let opening = "A recipe tailored to your selected preferences.";
-            let whyItWorks = "This recipe is designed for good flavor and effective dosing.";
-            let ingredients = [];
-            let instructions = [];
-            let decarb = "Preheat oven to 240\u00b0F (115\u00b0C). Break up cannabis and spread on parchment. Bake 30-40 minutes, stirring once. Cool completely.";
-            let infusion = "Infuse decarboxylated cannabis into butter or oil on low heat for 2-3 hours, then strain.";
-            let terpene = "Balanced terpene profile based on your selections.";
-            let strain = "Recommended strain based on your choices.";
-            let dosageNote = "Follow your selected dose level. Start low and go slow.";
-
-            if (recipeStyle === "chocolate" && desiredEffect === "deep-relaxation") {
-                title = "Deep Relaxation Dark Chocolate Truffles";
-                opening = "Rich dark chocolate truffles designed for strong relaxation.";
-                ingredients = ["8 oz dark chocolate", "1/4 cup cannabis-infused coconut oil", "2 tbsp cocoa powder", "1 tsp vanilla", "Pinch of salt"];
-                instructions = ["Melt chocolate and infused oil together.", "Stir in cocoa, vanilla, and salt.", "Cool slightly and form into truffles.", "Refrigerate 2 hours until set."];
-                terpene = "Myrcene + Linalool for deep relaxation.";
-                strain = "Granddaddy Purple or similar relaxing indica.";
-            } else if (recipeStyle === "gummy" && desiredEffect === "uplifting") {
-                title = "Uplifting Citrus Gummies";
-                opening = "Bright citrus gummies for mood and energy.";
-                ingredients = ["1 cup orange juice", "3 tbsp infused honey", "2 tbsp gelatin", "2 tbsp sugar"];
-                instructions = ["Heat juice and sugar.", "Add gelatin and dissolve.", "Stir in infused honey.", "Pour into molds and refrigerate."];
-                terpene = "Limonene for uplifting effects.";
-                strain = "Sour Diesel or Jack Herer.";
-            } else {
-                title = "Custom " + recipeStyle.charAt(0).toUpperCase() + recipeStyle.slice(1) + " Recipe";
-                opening = "A " + desiredEffect.replace('-', ' ') + " focused " + recipeStyle + " recipe.";
-                ingredients = ["Main ingredients based on style", "Cannabis-infused fat or tincture", "Flavorings and seasonings"];
-                instructions = ["Prepare base ingredients.", "Add infused element.", "Cook or assemble as needed.", "Cool and portion appropriately."];
-                terpene = "Selected based on desired effect.";
-                strain = strainType.replace('-', ' ');
-            }
-
-            if (dose === "micro") dosageNote = "Microdose range (2-5mg THC). Very subtle effects.";
-            else if (dose === "macro") dosageNote = "Macro dose (200mg+). Use with extreme caution and experience.";
-            else dosageNote = "Follow your selected dose level carefully.";
-
-            let html = `
-                <h3 class="text-2xl font-semibold mb-4">${title}</h3>
-                <p class="mb-6 text-[#aaa]">${opening}</p>
-
-                <h4 class="font-semibold mb-2">Why It Works</h4>
-                <p class="mb-4">${whyItWorks}</p>
-
-                <h4 class="font-semibold mb-2">Complementary Terpenes</h4>
-                <p class="mb-4">${terpene}</p>
-
-                <h4 class="font-semibold mb-2">Ingredients</h4>
-                <ul class="list-disc pl-5 mb-4">
-                    ${ingredients.map(item => `<li>${item}</li>`).join('')}
-                </ul>
-
-                <h4 class="font-semibold mb-2">Instructions</h4>
-                <ol class="list-decimal pl-5 mb-4">
-                    ${instructions.map(step => `<li>${step}</li>`).join('')}
-                </ol>
-
-                <h4 class="font-semibold mb-2">Decarboxylation</h4>
-                <p class="mb-4">${decarb}</p>
-
-                <h4 class="font-semibold mb-2">Infusion Method</h4>
-                <p class="mb-4">${infusion}</p>
-
-                <h4 class="font-semibold mb-2">Strain Suggestion</h4>
-                <p class="mb-4">${strain}</p>
-
-                <h4 class="font-semibold mb-2">Dosage</h4>
-                <p>${dosageNote}</p>
-
-                <p class="mt-4 text-sm text-[#888]">THC % Range: ${thcPercent} | Strain Type: ${strainType.replace('-', ' ')} | Dose Level: ${dose}</p>
-            `;
-
-            resultBox.innerHTML = html;
-            resultBox.classList.remove('hidden');
-        }
-
         function getTerpenePairing() {
             const recipe = document.getElementById('terpene-recipe').value;
             const flavor = document.getElementById('terpene-flavor').value;
@@ -431,36 +240,21 @@
             const effect = document.getElementById('desired-effect2').value;
             const resultBox = document.getElementById('strain-result');
             
-            // List of 20 popular strains
-            const popularStrains = [
-                "Granddaddy Purple", "OG Kush", "Blue Dream", "Sour Diesel", "Jack Herer",
-                "Girl Scout Cookies", "Wedding Cake", "Gelato", "Runtz", "Zkittlez",
-                "Northern Lights", "Purple Punch", "Bruce Banner", "Durban Poison", "Maui Wowie",
-                "Bubba Kush", "Trainwreck", "Pineapple Express", "AK-47", "White Widow"
-            ];
+            // Only 4 top strains
+            let topStrains = [];
             
-            let recommendations = [];
-            
-            // Simple filtering based on effect
             if (effect === "relax" || effect === "body") {
-                recommendations = popularStrains.filter(s => 
-                    s.includes("Purple") || s.includes("Kush") || s.includes("Gelato") || s.includes("Wedding") || s.includes("Bubba")
-                );
+                topStrains = ["Granddaddy Purple", "OG Kush", "Gelato", "Wedding Cake"];
             } else if (effect === "uplifting" || effect === "focused") {
-                recommendations = popularStrains.filter(s => 
-                    s.includes("Sour") || s.includes("Jack") || s.includes("Durban") || s.includes("Pineapple") || s.includes("Maui")
-                );
+                topStrains = ["Sour Diesel", "Jack Herer", "Durban Poison", "Pineapple Express"];
             } else {
-                recommendations = popularStrains;
+                topStrains = ["Blue Dream", "Girl Scout Cookies", "Runtz", "Zkittlez"];
             }
             
-            // Limit to 20 and shuffle a bit for variety
-            recommendations = recommendations.slice(0, 20);
+            let html = `<h3 class="font-semibold mb-4">Top 4 Strain Recommendations</h3><div class="grid grid-cols-2 gap-3">`;
             
-            let html = `<h3 class="font-semibold mb-4">20 Popular Strain Recommendations</h3><div class="grid grid-cols-2 md:grid-cols-3 gap-2 text-sm">`;
-            
-            recommendations.forEach(strain => {
-                html += `<div class="bg-[#1f1f1f] px-3 py-2 rounded-xl">${strain}</div>`;
+            topStrains.forEach(strain => {
+                html += `<div class="bg-[#1f1f1f] px-4 py-3 rounded-2xl text-center font-medium">${strain}</div>`;
             });
             
             html += `</div>`;
@@ -593,311 +387,11 @@
                     <p>When resuming, start with lower doses than you were using before the break. Your sensitivity will be higher.</p>
                 `;
             }
-        }
-
-        function getTerpenePairing() {
-            const recipe = document.getElementById('terpene-recipe').value;
-            const flavor = document.getElementById('terpene-flavor').value;
-            
-            let result = `<h3 class="font-semibold mb-3">Recommended Terpenes</h3>`;
-            
-            if (flavor === "citrus") {
-                result += `<p><strong>Limonene</strong> — Bright and uplifting. Great for gummies and beverages.</p>`;
-            } else if (flavor === "earthy") {
-                result += `<p><strong>Myrcene + Caryophyllene</strong> — Relaxing and grounding. Perfect for savory dishes.</p>`;
-            } else {
-                result += `<p><strong>Limonene + Pinene</strong> — Uplifting with a fresh profile. Works well with most recipes.</p>`;
-            }
-            
-            document.getElementById('terpene-result').innerHTML = result;
-            document.getElementById('terpene-result').classList.remove('hidden');
-        }
-
-        function recommendStrain() {
-            const dish = document.getElementById('dish-type').value;
-            const effect = document.getElementById('desired-effect2').value;
-            const resultBox = document.getElementById('strain-result');
-            
-            // List of 20 popular strains
-            const popularStrains = [
-                "Granddaddy Purple", "OG Kush", "Blue Dream", "Sour Diesel", "Jack Herer",
-                "Girl Scout Cookies", "Wedding Cake", "Gelato", "Runtz", "Zkittlez",
-                "Northern Lights", "Purple Punch", "Bruce Banner", "Durban Poison", "Maui Wowie",
-                "Bubba Kush", "Trainwreck", "Pineapple Express", "AK-47", "White Widow"
-            ];
-            
-            let recommendations = [];
-            
-            if (effect === "relax" || effect === "body") {
-                recommendations = popularStrains.filter(s => 
-                    s.includes("Purple") || s.includes("Kush") || s.includes("Gelato") || s.includes("Wedding") || s.includes("Bubba")
-                );
-            } else if (effect === "uplifting" || effect === "focused") {
-                recommendations = popularStrains.filter(s => 
-                    s.includes("Sour") || s.includes("Jack") || s.includes("Durban") || s.includes("Pineapple") || s.includes("Maui")
-                );
-            } else {
-                recommendations = popularStrains;
-            }
-            
-            recommendations = recommendations.slice(0, 20);
-            
-            let html = `<h3 class="font-semibold mb-4">20 Popular Strain Recommendations</h3><div class="grid grid-cols-2 md:grid-cols-3 gap-2 text-sm">`;
-            
-            recommendations.forEach(strain => {
-                html += `<div class="bg-[#1f1f1f] px-3 py-2 rounded-xl">${strain}</div>`;
-            });
-            
-            html += `</div>`;
-            
-            resultBox.innerHTML = html;
-            resultBox.classList.remove('hidden');
-        }
-
-        function saveJournalEntry() {
-            const entry = {
-                recipe: document.getElementById('journal-recipe').value || "Unnamed Recipe",
-                thc: document.getElementById('journal-thc').value,
-                servings: document.getElementById('journal-servings').value,
-                effects: document.getElementById('journal-effects').value || "No notes",
-                date: new Date().toLocaleDateString()
-            };
-            
-            let entries = JSON.parse(localStorage.getItem('dosingJournal') || '[]');
-            entries.unshift(entry);
-            localStorage.setItem('dosingJournal', JSON.stringify(entries));
-            
-            loadJournalEntries();
-            
-            // Clear form
-            document.getElementById('journal-recipe').value = '';
-            document.getElementById('journal-thc').value = '';
-            document.getElementById('journal-servings').value = '';
-            document.getElementById('journal-effects').value = '';
-        }
-
-        function loadJournalEntries() {
-            const container = document.getElementById('journal-entries');
-            let entries = JSON.parse(localStorage.getItem('dosingJournal') || '[]');
-            
-            if (entries.length === 0) {
-                container.innerHTML = '<p class="text-[#888]">No entries yet. Start logging your edibles!</p>';
-                return;
-            }
-            
-            container.innerHTML = entries.map(e => `
-                <div class="bg-[#1f1f1f] p-4 rounded-2xl">
-                    <strong>${e.recipe}</strong> — ${e.thc}mg total<br>
-                    <span class="text-sm text-[#aaa]">${e.date} • ${e.servings} servings • ${e.effects}</span>
-                </div>
-            `).join('');
-        }
-
-        function calculateYield() {
-            const grams = parseFloat(document.getElementById('grow-yield').value) || 100;
-            const thcPercent = parseFloat(document.getElementById('grow-thc').value) || 18;
-            
-            const totalTHC = grams * (thcPercent / 100) * 1000;
-            const batches10 = Math.floor(totalTHC / 10);
-            const batches20 = Math.floor(totalTHC / 20);
-            
-            document.getElementById('grow-result').innerHTML = `
-                <p><strong>Estimated Total THC:</strong> ${totalTHC.toFixed(0)} mg</p>
-                <p class="mt-3"><strong>You could make approximately:</strong><br>
-                • ${batches10} servings at 10mg each<br>
-                • ${batches20} servings at 20mg each</p>
-            `;
-            document.getElementById('grow-result').classList.remove('hidden');
-        }
-
-        function showEducation(topic) {
-            const content = document.getElementById('education-content');
-            content.classList.remove('hidden');
-            
-            if (topic === 'decarb') {
-                content.innerHTML = `
-                    <h3 class="text-xl font-semibold mb-4">How Decarboxylation Works (Step-by-Step)</h3>
-                    <p class="mb-4">Decarboxylation is the essential process of heating cannabis to convert THCA into THC so it becomes psychoactive and effective in edibles.</p>
-                    
-                    <h4 class="font-semibold mt-4 mb-2">Step 1: Preheat Your Oven</h4>
-                    <p>Set your oven to exactly 240\u00b0F (115\u00b0C). This temperature is ideal for converting THCA without destroying too many terpenes.</p>
-                    
-                    <h4 class="font-semibold mt-4 mb-2">Step 2: Prepare the Cannabis</h4>
-                    <p>Break your cannabis flower into small pieces roughly the size of rice grains. Avoid grinding it into a fine powder.</p>
-                    
-                    <h4 class="font-semibold mt-4 mb-2">Step 3: Spread Evenly</h4>
-                    <p>Line a baking tray with parchment paper and spread the cannabis in a single, even layer.</p>
-                    
-                    <h4 class="font-semibold mt-4 mb-2">Step 4: Bake</h4>
-                    <p>Place the tray in the oven and bake for 30-40 minutes. Stir the cannabis once halfway through for even decarboxylation.</p>
-                    
-                    <h4 class="font-semibold mt-4 mb-2">Step 5: Cool Completely</h4>
-                    <p>Remove from the oven and let it cool fully at room temperature before using in any recipe. This preserves potency and prevents burning.</p>
-                `;
-            } else if (topic === 'infusion') {
-                content.innerHTML = `
-                    <h3 class="text-xl font-semibold mb-4">Infusion Methods Explained (Step-by-Step)</h3>
-                    <p class="mb-4">Infusion extracts cannabinoids from decarboxylated cannabis into a fat or alcohol base so it can be used in edible recipes.</p>
-                    
-                    <h4 class="font-semibold mt-4 mb-2">Best Method: Slow Cooker / Crockpot</h4>
-                    <ol class="list-decimal pl-5 mb-4">
-                        <li>Decarboxylate your cannabis first.</li>
-                        <li>Combine the cannabis with butter, coconut oil, or olive oil in a slow cooker.</li>
-                        <li>Set to low heat (around 160-180\u00b0F) and cook for 2-3 hours, stirring occasionally.</li>
-                        <li>Strain the mixture through cheesecloth into a clean jar.</li>
-                        <li>Store in the refrigerator or freezer.</li>
-                    </ol>
-                    
-                    <h4 class="font-semibold mt-4 mb-2">Quick Stovetop Method</h4>
-                    <ol class="list-decimal pl-5 mb-4">
-                        <li>Decarboxylate your cannabis.</li>
-                        <li>Combine cannabis and oil/butter in a saucepan.</li>
-                        <li>Heat on the lowest possible setting for 45-60 minutes. Do not let it boil.</li>
-                        <li>Stir frequently.</li>
-                        <li>Strain and store.</li>
-                    </ol>
-                `;
-            } else {
-                content.innerHTML = `
-                    <h3 class="text-xl font-semibold mb-4">Understanding Tolerance (Step-by-Step)</h3>
-                    <p class="mb-4">Tolerance occurs when your body becomes less responsive to cannabis after repeated use. Here's how to manage it effectively.</p>
-                    
-                    <h4 class="font-semibold mt-4 mb-2">Step 1: Recognize the Signs</h4>
-                    <p>You need significantly more cannabis than before to feel the same effects.</p>
-                    
-                    <h4 class="font-semibold mt-4 mb-2">Step 2: Understand the Cause</h4>
-                    <p>Your cannabinoid receptors (especially CB1) become desensitized with frequent activation.</p>
-                    
-                    <h4 class="font-semibold mt-4 mb-2">Step 3: Take a Tolerance Break</h4>
-                    <p>Even a short 48-72 hour break can help. For best results, take 5-14 days off.</p>
-                    
-                    <h4 class="font-semibold mt-4 mb-2">Step 4: Reset Your System</h4>
-                    <p>During a break, avoid all cannabis products. Exercise, hydration, and good sleep help speed up the reset.</p>
-                    
-                    <h4 class="font-semibold mt-4 mb-2">Step 5: Return Slowly</h4>
-                    <p>When resuming, start with lower doses than you were using before the break. Your sensitivity will be higher.</p>
-                `;
-            }
-        }
-
-        function getTerpenePairing() {
-            const recipe = document.getElementById('terpene-recipe').value;
-            const flavor = document.getElementById('terpene-flavor').value;
-            
-            let result = `<h3 class="font-semibold mb-3">Recommended Terpenes</h3>`;
-            
-            if (flavor === "citrus") {
-                result += `<p><strong>Limonene</strong> — Bright and uplifting. Great for gummies and beverages.</p>`;
-            } else if (flavor === "earthy") {
-                result += `<p><strong>Myrcene + Caryophyllene</strong> — Relaxing and grounding. Perfect for savory dishes.</p>`;
-            } else {
-                result += `<p><strong>Limonene + Pinene</strong> — Uplifting with a fresh profile. Works well with most recipes.</p>`;
-            }
-            
-            document.getElementById('terpene-result').innerHTML = result;
-            document.getElementById('terpene-result').classList.remove('hidden');
-        }
-
-        function recommendStrain() {
-            const dish = document.getElementById('dish-type').value;
-            const effect = document.getElementById('desired-effect2').value;
-            const resultBox = document.getElementById('strain-result');
-            
-            const popularStrains = [
-                "Granddaddy Purple", "OG Kush", "Blue Dream", "Sour Diesel", "Jack Herer",
-                "Girl Scout Cookies", "Wedding Cake", "Gelato", "Runtz", "Zkittlez",
-                "Northern Lights", "Purple Punch", "Bruce Banner", "Durban Poison", "Maui Wowie",
-                "Bubba Kush", "Trainwreck", "Pineapple Express", "AK-47", "White Widow"
-            ];
-            
-            let recommendations = [];
-            
-            if (effect === "relax" || effect === "body") {
-                recommendations = popularStrains.filter(s => 
-                    s.includes("Purple") || s.includes("Kush") || s.includes("Gelato") || s.includes("Wedding") || s.includes("Bubba")
-                );
-            } else if (effect === "uplifting" || effect === "focused") {
-                recommendations = popularStrains.filter(s => 
-                    s.includes("Sour") || s.includes("Jack") || s.includes("Durban") || s.includes("Pineapple") || s.includes("Maui")
-                );
-            } else {
-                recommendations = popularStrains;
-            }
-            
-            recommendations = recommendations.slice(0, 20);
-            
-            let html = `<h3 class="font-semibold mb-4">20 Popular Strain Recommendations</h3><div class="grid grid-cols-2 md:grid-cols-3 gap-2 text-sm">`;
-            
-            recommendations.forEach(strain => {
-                html += `<div class="bg-[#1f1f1f] px-3 py-2 rounded-xl">${strain}</div>`;
-            });
-            
-            html += `</div>`;
-            
-            resultBox.innerHTML = html;
-            resultBox.classList.remove('hidden');
-        }
-
-        function saveJournalEntry() {
-            const entry = {
-                recipe: document.getElementById('journal-recipe').value || "Unnamed Recipe",
-                thc: document.getElementById('journal-thc').value,
-                servings: document.getElementById('journal-servings').value,
-                effects: document.getElementById('journal-effects').value || "No notes",
-                date: new Date().toLocaleDateString()
-            };
-            
-            let entries = JSON.parse(localStorage.getItem('dosingJournal') || '[]');
-            entries.unshift(entry);
-            localStorage.setItem('dosingJournal', JSON.stringify(entries));
-            
-            loadJournalEntries();
-            
-            // Clear form
-            document.getElementById('journal-recipe').value = '';
-            document.getElementById('journal-thc').value = '';
-            document.getElementById('journal-servings').value = '';
-            document.getElementById('journal-effects').value = '';
-        }
-
-        function loadJournalEntries() {
-            const container = document.getElementById('journal-entries');
-            let entries = JSON.parse(localStorage.getItem('dosingJournal') || '[]');
-            
-            if (entries.length === 0) {
-                container.innerHTML = '<p class="text-[#888]">No entries yet. Start logging your edibles!</p>';
-                return;
-            }
-            
-            container.innerHTML = entries.map(e => `
-                <div class="bg-[#1f1f1f] p-4 rounded-2xl">
-                    <strong>${e.recipe}</strong> — ${e.thc}mg total<br>
-                    <span class="text-sm text-[#aaa]">${e.date} • ${e.servings} servings • ${e.effects}</span>
-                </div>
-            `).join('');
-        }
-
-        function calculateYield() {
-            const grams = parseFloat(document.getElementById('grow-yield').value) || 100;
-            const thcPercent = parseFloat(document.getElementById('grow-thc').value) || 18;
-            
-            const totalTHC = grams * (thcPercent / 100) * 1000;
-            const batches10 = Math.floor(totalTHC / 10);
-            const batches20 = Math.floor(totalTHC / 20);
-            
-            document.getElementById('grow-result').innerHTML = `
-                <p><strong>Estimated Total THC:</strong> ${totalTHC.toFixed(0)} mg</p>
-                <p class="mt-3"><strong>You could make approximately:</strong><br>
-                • ${batches10} servings at 10mg each<br>
-                • ${batches20} servings at 20mg each</p>
-            `;
-            document.getElementById('grow-result').classList.remove('hidden');
         }
 
         function initApp() {
-            loadJournalEntries();
-            document.getElementById('recipe').classList.add('active');
-            document.getElementById('nav-recipe').classList.add('active');
+            document.getElementById('strain').classList.add('active');
+            document.getElementById('nav-strain').classList.add('active');
         }
 
         window.onload = initApp;
